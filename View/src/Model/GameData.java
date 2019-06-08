@@ -53,7 +53,7 @@ public class GameData {
 	private playerData[] player; 
 	private int[] yut = new int[4];//0 means round part, 1 means flat part
 	private int turn;
-	private int[] stateChoosed = new int[2];
+	private int[] stateChose = new int[2];
 	
 	public static GameData getInstance() {//this function returns instance, which already exists
 		if(gameData == null) {
@@ -187,13 +187,13 @@ public class GameData {
 	public void moveTurn() {
 		turn = (turn+1)%numberOfPlayers;
 	}
-//get choosed state
-	public int[] getChoosedState() {
-		return stateChoosed;
+//get chose state
+	public int[] getChoseState() {
+		return stateChose;//this return reference so you have to fix it later
 	}
-//set choosed state
-	public void setChoosedState(int state, int num) {
-		stateChoosed[0] = state;
-		stateChoosed[1] = num;
+//set chose state
+	public void setChoseState(int state, int num) {
+		stateChose[0] = state;
+		stateChose[1] = num;
 	}
 }

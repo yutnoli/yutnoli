@@ -1,0 +1,9 @@
+package Control;
+
+import Model.GameData;
+
+public class ValidPlace {
+	GameData data = GameData.getInstance();
+	
+	
+}

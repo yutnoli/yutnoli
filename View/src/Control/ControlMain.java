@@ -17,15 +17,25 @@ public class ControlMain {
 			if(!clicked) {
 				if (state == 0) {//normal state
 					if(data.getNsTeamData(num) == data.getTurn()) {
-						data.setChoosedState(0,num);
+						data.setChoseState(0,num);
+						clicked = true;
 					}
 				}
 				else if(state == 1) {//cornerCenterState
-				
+					if(data.getCcsTeamData(num) == data.getTurn()) {
+						data.setChoseState(1, num);
+						clicked = true;
+					}
 				}
 				else if(state == 2) {//startState
-				
+					if(data.getSsTeamData() == data.getTurn()) {
+						data.setChoseState(2, num);
+						clicked = true;
+					}
 				}
+			}
+			else if(clicked) {
+				
 			}
 		}
 	}
