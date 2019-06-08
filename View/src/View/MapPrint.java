@@ -22,6 +22,7 @@ public class MapPrint extends JFrame {
 	JButton endStone;
 	JButton throwYutRandom;
 	JButton throwYutselect;
+	JButton showTurn;
 	ButtonAction mapClicked;
 	ImageIcon[] teamIcon = new ImageIcon[20];
 	JButton[] yutPosition = new JButton[4];
@@ -34,6 +35,7 @@ public class MapPrint extends JFrame {
 	ImageIcon[] team3StateIcon = new ImageIcon[4];
 	ImageIcon[] team4StateIcon = new ImageIcon[4];
 	ImageIcon stateEmpty;
+	ImageIcon[] turn = new ImageIcon[4];
 	
 	public void initMapPrint(int numOfPlayers, int numOfStones) {
 		data.initGameData(numOfPlayers, numOfStones);
@@ -121,6 +123,12 @@ public class MapPrint extends JFrame {
 		img = icon.getImage();
 		resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
 		stateEmpty = new ImageIcon(resizedImage);
+		for(int i = 0; i < 4; i++) {
+			icon = new ImageIcon("./team" + (i + 1) + ".png");
+			img = icon.getImage();
+			resizedImage = img.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+			turn[i] = new ImageIcon(resizedImage);
+		}
 		
 //이미지 넣은 버튼 생성
 		for(int i = 0; i < 24; i++) {
@@ -197,6 +205,13 @@ public class MapPrint extends JFrame {
 		startStateStone.setBorderPainted(false);
 		startStateStone.setContentAreaFilled(false);
 		startStateStone.setFocusPainted(false);
+		//버튼에 이미지 입력
+		showTurn = new JButton(turn[0]);
+		//버튼 배경 삭제
+		showTurn.setBorderPainted(false);
+		showTurn.setContentAreaFilled(false);
+		showTurn.setFocusPainted(false);
+		
 		
 		mapClicked =  new ButtonAction(this, normalState, cornerCenterState, startState, playerInfo, endStone, throwYutRandom, throwYutselect);
 		for(int i = 0; i < 24; i++) {
@@ -236,10 +251,10 @@ public class MapPrint extends JFrame {
 			playerInfo[i].setBounds(840, 600 - 100*i, 100, 50);
 		}
 		endStone.setBounds(860, 740, 70, 70);
-		throwYutRandom.setBounds(290, 50, 140, 70);
-		throwYutselect.setBounds(590, 50, 140, 70);
+		throwYutRandom.setBounds(330, 50, 140, 70);
+		throwYutselect.setBounds(520, 50, 140, 70);
 		for(int i = 0; i < 4; i++) {
-			yutPosition[i].setBounds(810 + 22*i, 50, 20, 70);
+			yutPosition[i].setBounds(710 + 22*i, 50, 20, 70);
 		}
 		
 		for(int i = 0; i < 4; i++) {
@@ -259,6 +274,8 @@ public class MapPrint extends JFrame {
 		cornerCenterStateStone[2].setBounds(276, 757, 10, 43);
 		cornerCenterStateStone[3].setBounds(551, 482, 10, 43);
 		startStateStone.setBounds(826, 757, 10, 43);
+		
+		showTurn.setBounds(200, 50, 70, 70);
 		
 //panel에 button add		
 		for(int i = 0; i < 24; i++) {
@@ -285,8 +302,12 @@ public class MapPrint extends JFrame {
 			gamePanel.add(cornerCenterStateStone[i]);
 		}
 		gamePanel.add(startStateStone);
+		gamePanel.add(showTurn);
 		
 		gamePanel.setBackground(Color.white);
+		
+		initMap();
+		
 		this.setSize(1000, 1000);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
@@ -314,7 +335,7 @@ public class MapPrint extends JFrame {
 		for(int i = 0; i < 29; i++) {
 			if(stateChanged[i]) {
 				System.out.println("stateChanged inside, stateChangedNumber: " + i);
-				if(i == 4 || i == 9 || i == 14 || i == 21) {
+				if(i == 4 || i == 9 || i == 14) {
 					if(data.getNumData(1, i%4) == 0) {
 						cornerCenterStateStone[i%4].setIcon(stateEmpty);
 					}
@@ -330,6 +351,25 @@ public class MapPrint extends JFrame {
 						}
 						else if(data.getTeamData(1, i%4) == 3) {
 							cornerCenterStateStone[i%4].setIcon(team4StateIcon[data.getNumData(1, i%4) - 1]);
+						}
+					}
+				}
+				else if(i == 21) {
+					if(data.getNumData(1, 3) == 0) {
+						cornerCenterStateStone[3].setIcon(stateEmpty);
+					}
+					else {
+						if(data.getTeamData(1, 3) == 0) {
+							cornerCenterStateStone[3].setIcon(team1StateIcon[data.getNumData(1, 3) - 1]);
+						}
+						else if(data.getTeamData(1, 3) == 1) {
+							cornerCenterStateStone[3].setIcon(team2StateIcon[data.getNumData(1, 3) - 1]);
+						}
+						else if(data.getTeamData(1, 3) == 2) {
+							cornerCenterStateStone[3].setIcon(team3StateIcon[data.getNumData(1, 3) - 1]);
+						}
+						else if(data.getTeamData(1, 3) == 3) {
+							cornerCenterStateStone[3].setIcon(team4StateIcon[data.getNumData(1, 3) - 1]);
 						}
 					}
 				}
@@ -460,7 +500,43 @@ public class MapPrint extends JFrame {
 			}
 		}
 	}
+	
+	public void turnChanged() {
+		showTurn.setIcon(turn[data.getTurn()]);
+	}
+	
+	public void initMap() {
+		int playerNum = 4;
+		int stoneNum = 4;
+		
+		for(int i = 0; i < 4; i++) {
+			yutPosition[i].setIcon(yutIcon[0]);
+		}
+
+		for(int i = 0; i < 24; i++) {
+			normalStateStone[i].setIcon(stateEmpty);
+		}
+		for(int i = 0; i < 4; i++) {
+			cornerCenterStateStone[i].setIcon(stateEmpty);
+		}
+		startStateStone.setIcon(stateEmpty);
+		
+		playerNum = data.getNumOfPlayers();
+		stoneNum = data.getNumOfStones();
+		
+		for(int i = 4 - playerNum; i > 0; i--) {
+			playerInfo[4 - i].setIcon(null);
+		}
+		
+		for(int i = 0; i < playerNum; i++) {
+			playerInfo[i].setIcon(teamIcon[5*i + stoneNum]);
+		}
+		
+		showTurn.setIcon(turn[0]);
+	}
 }
+
+
 
 class SelectPosition implements ActionListener{
 	JButton[] getPositionButton;
@@ -510,9 +586,10 @@ class SelectPosition implements ActionListener{
 
 class GetPosition extends JFrame{
 	JButton[] getSelectButton = new JButton[5];
+	SelectPosition position = new SelectPosition();
 	int selected;
 	
-	void setPositionFrame(ControlMain controler, MapPrint mapPrint) {
+	void initPositionFrame(ControlMain controler, MapPrint mapPrint) {
 		this.setTitle("Select Yut Position");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//If user close the frame before select yut position, then program stop.
 		Container gamePanel = getContentPane();
@@ -524,7 +601,7 @@ class GetPosition extends JFrame{
 		getSelectButton[3] = new JButton("Yut");
 		getSelectButton[4] = new JButton("Mo");
 		
-		SelectPosition position = new SelectPosition();
+		
 		position.initSelcetAction(getSelectButton, this, selected, controler, mapPrint);
 		
 		for(int i = 0; i < 5; i++) {
@@ -535,6 +612,9 @@ class GetPosition extends JFrame{
 		gamePanel.setBackground(Color.white);
 		this.setSize(600, 300);
 		this.setLocationRelativeTo(null);
+	}
+	
+	void showPositionFrame() {
 		this.setVisible(true);
 	}
 }

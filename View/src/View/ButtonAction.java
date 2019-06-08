@@ -32,6 +32,7 @@ public class ButtonAction implements ActionListener{
 		this.endStone = endStone;
 		this.throwYutRandom = throwYutRandom;
 		this.throwYutSelect = throwYutSelect;
+		getPos.initPositionFrame(controler, mapPrint);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -42,6 +43,7 @@ public class ButtonAction implements ActionListener{
 				System.out.println("normalState " + i + "번 버튼이 눌렸습니다!!");
 				controler.recieveStateAction(0, i);
 				mapPrint.playerDataImageChange();
+				mapPrint.turnChanged();
 				data.resetChangedData();
 				find = true;
 			}
@@ -52,6 +54,7 @@ public class ButtonAction implements ActionListener{
 				System.out.println("cornerCenterState " + i + "번 버튼이 눌렸습니다!!");
 				controler.recieveStateAction(1, i);
 				mapPrint.playerDataImageChange();
+				mapPrint.turnChanged();
 				data.resetChangedData();
 				find = true;
 			}
@@ -62,6 +65,7 @@ public class ButtonAction implements ActionListener{
 				System.out.println("player " + i + "번 버튼이 눌렸습니다!!");
 				controler.recieveStateAction(3, i);
 				mapPrint.playerDataImageChange();
+				mapPrint.turnChanged();
 				data.resetChangedData();
 				find = true;
 				System.out.println("Action finished");
@@ -72,6 +76,7 @@ public class ButtonAction implements ActionListener{
 			System.out.println("startState가 눌렸습니다!!");
 			controler.recieveStateAction(2, 0);
 			mapPrint.playerDataImageChange();
+			mapPrint.turnChanged();
 			data.resetChangedData();
 		}
 		
@@ -79,6 +84,7 @@ public class ButtonAction implements ActionListener{
 			System.out.println("endStone 버튼이 눌렸습니다!!");
 			controler.recieveStateAction(4, 0);
 			mapPrint.playerDataImageChange();
+			mapPrint.turnChanged();
 			data.resetChangedData();
 		}
 		
@@ -91,7 +97,7 @@ public class ButtonAction implements ActionListener{
 		
 		else if(e.getSource().equals(throwYutSelect)) {
 			System.out.println("throwYutSelect 버튼이 눌렸습니다!!");
-			getPos.setPositionFrame(controler, mapPrint);
+			getPos.showPositionFrame();
 		}
 		find = false;
 	}

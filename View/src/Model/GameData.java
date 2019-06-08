@@ -129,7 +129,7 @@ public class GameData {
 	}
 	
 	public int getNumData(int state, int num) {
-		System.out.println("1state: " + state);
+		System.out.println("state: " + state);
 		if(state == 0) {
 			System.out.println("normalStateNumber: " + normalState[num].number);
 			return normalState[num].number;
@@ -335,6 +335,10 @@ public class GameData {
 		}
 		else if(state == 4) {
 			validPlace[29] = true;
+		}
+		System.out.println("valid place:");
+		for(int i = 0; i < 6; i++) {
+			System.out.println(validPlace[i*5] + ", " + validPlace[i*5 + 1] + ", " + validPlace[i*5 + 2] + ", " + validPlace[i*5 + 3] + ", " + validPlace[i*5 + 4]);
 		}
 	}
 	

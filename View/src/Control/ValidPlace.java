@@ -8,6 +8,7 @@ public class ValidPlace {
 	boolean[] playerMove = new boolean[5];
 	
 	void setValidPlaceMap(int state, int num) {
+		data.resetValidPlace();
 		choseState[0] = data.getChoseStateST();
 		choseState[1] = data.getChoseStateNU();
 		for(int i = 0;i < 5; i++) {
@@ -16,6 +17,10 @@ public class ValidPlace {
 		for (int i = 0; i < 5; i++) {//get player's move data
 			if(data.findPlayerMove(data.getTurn(), i))
 				playerMove[i] = true;
+		}
+		System.out.println("playerMove: ");
+		for(int i = 0; i < 5; i++) {
+			System.out.println(playerMove[i]);
 		}
 		//check chose state
 		if(playerMove[0]) {
@@ -64,6 +69,8 @@ public class ValidPlace {
 					data.setValidPlace(1, 1);
 				else if(choseState[1] == 10 || choseState[1] == 18)
 					data.setValidPlace(1, 2);
+				else if(choseState[1] == 16 || choseState[1] == 20)
+					data.setValidPlace(1, 3);
 				else if(choseState[1] == 14 || choseState[1] == 22)
 					data.setValidPlace(2, 0);
 				else if(choseState[1] == 15 || choseState[1] == 23) {
@@ -197,6 +204,7 @@ public class ValidPlace {
 	
 	public boolean checkValidPlace(int state, int num) {
 		setValidPlaceMap(state, num);
+		System.out.println("checkValidPlace, num: " + num);
 		return data.getValidPlace(state, num);
 	}
 }
