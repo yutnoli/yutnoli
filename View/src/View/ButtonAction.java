@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import Control.ControlMain;
+import Model.GameData;
 
 public class ButtonAction implements ActionListener{
 	JButton[] normalState;
@@ -19,6 +20,8 @@ public class ButtonAction implements ActionListener{
 	JButton throwYutSelect;
 	MapPrint mapPrint;
 	ControlMain controler = new ControlMain();
+	GameData data = GameData.getInstance();
+	GetPosition getPos = new GetPosition();
 	
 	public ButtonAction(MapPrint mapPrint, JButton[] normalState, JButton[] cornerCenterState, JButton startState, JButton[] playerInfo, JButton endStone, JButton throwYutRandom, JButton throwYutSelect){
 		this.mapPrint = mapPrint;
@@ -39,7 +42,7 @@ public class ButtonAction implements ActionListener{
 				System.out.println("normalState " + i + "번 버튼이 눌렸습니다!!");
 				controler.recieveStateAction(0, i);
 				mapPrint.playerDataImageChange();
-				mapPrint.yutImageChange();
+				data.resetChangedData();
 				find = true;
 			}
 		}
@@ -49,7 +52,7 @@ public class ButtonAction implements ActionListener{
 				System.out.println("cornerCenterState " + i + "번 버튼이 눌렸습니다!!");
 				controler.recieveStateAction(1, i);
 				mapPrint.playerDataImageChange();
-				mapPrint.yutImageChange();
+				data.resetChangedData();
 				find = true;
 			}
 		}
@@ -59,7 +62,7 @@ public class ButtonAction implements ActionListener{
 				System.out.println("player " + i + "번 버튼이 눌렸습니다!!");
 				controler.recieveStateAction(3, i);
 				mapPrint.playerDataImageChange();
-				mapPrint.yutImageChange();
+				data.resetChangedData();
 				find = true;
 				System.out.println("Action finished");
 			}
@@ -69,28 +72,29 @@ public class ButtonAction implements ActionListener{
 			System.out.println("startState가 눌렸습니다!!");
 			controler.recieveStateAction(2, 0);
 			mapPrint.playerDataImageChange();
-			mapPrint.yutImageChange();
+			data.resetChangedData();
 		}
 		
 		else if(e.getSource().equals(endStone)) {
 			System.out.println("endStone 버튼이 눌렸습니다!!");
 			controler.recieveStateAction(4, 0);
 			mapPrint.playerDataImageChange();
-			mapPrint.yutImageChange();
+			data.resetChangedData();
 		}
 		
 		else if(e.getSource().equals(throwYutRandom)) {
 			System.out.println("throwYutRandom 버튼이 눌렸습니다!!");
 			controler.recieveThrowAction();
-			mapPrint.playerDataImageChange();
 			mapPrint.yutImageChange();
+			data.resetChangedData();
 		}
 		
 		else if(e.getSource().equals(throwYutSelect)) {
 			System.out.println("throwYutSelect 버튼이 눌렸습니다!!");
-			controler.recieveThrowAction(4);////////////Have to change later. Get reaction from User about which yut position to make.
-			mapPrint.playerDataImageChange();
+			getPos.setPositionFrame();
+			controler.recieveThrowAction(data.getSelectedPos());////////////Selected position is already saved in data. So this function does not need parameter. So changed it later. 
 			mapPrint.yutImageChange();
+			data.resetChangedData();
 		}
 		find = false;
 	}

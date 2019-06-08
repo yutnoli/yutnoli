@@ -1,0 +1,62 @@
+package Control;
+
+import Model.GameData;
+
+public class DeletMove extends StateExpressionChange{
+	GameData data = GameData.getInstance();
+	
+	public void deletUsedMove(int state, int num) {
+		int seQstateOld, seQstateNew;
+		int diff;
+		seQstateOld = convertOr2Seq(data.getChoseStateST(), data.getChoseStateNU());
+		seQstateNew = convertOr2Seq(state, num);
+		if(seQstateOld < 22) {
+			if(seQstateNew == 22) {
+				seQstateNew = 5;
+			}
+			else if(seQstateNew == 35) {
+				seQstateNew = 10;
+			}
+			else if(seQstateNew == 28) {
+				seQstateNew = 15;
+			}
+			else if(seQstateNew == 41) {
+				seQstateNew = 20;
+			}
+			else if(seQstateNew == 42) {
+				seQstateNew = 21;
+			}
+		}
+		else if(seQstateOld > 21 && seQstateOld < 35) {
+			if(seQstateNew == 38) {
+				seQstateNew = 25;
+			}
+			else if(seQstateNew > 15 && seQstateNew < 20) {
+				seQstateNew += 13;
+			}
+			else if(seQstateNew == 41) {
+				seQstateNew = 33;
+			}
+			else if(seQstateNew == 42) {
+				seQstateNew = 34;
+			}
+		}
+		diff = seQstateNew - seQstateOld;
+		if(diff == 1) {
+			data.removePlayerMove(data.getTurn(), 0);
+		}
+		else if(diff == 2) {
+			data.removePlayerMove(data.getTurn(), 1);
+		}
+		else if(diff == 3) {
+			data.removePlayerMove(data.getTurn(), 2);
+		}
+		else if(diff == 4) {
+			data.removePlayerMove(data.getTurn(), 3);
+		}
+		else if(diff == 5) {
+			data.removePlayerMove(data.getTurn(), 4);
+		}
+	}
+	
+}

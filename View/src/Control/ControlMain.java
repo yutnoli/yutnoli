@@ -5,6 +5,7 @@ import Control.ThrowingYut;
 
 public class ControlMain {
 	GameData data = GameData.getInstance();
+	DeleteMove delete = new DeleteMove();
 	ThrowingYut throwYut = new ThrowingYut();
 	ValidPlace validPlaceControl = new ValidPlace();
 	boolean clicked = false;
@@ -53,16 +54,19 @@ public class ControlMain {
 								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
 								data.setTeamDataChanged(choseState[1]);
 								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
 								clicked = false;
 							}
 							else {
 								data.setStateData(choseState[0], choseState[1], 9, 0);
-								clicked = false;
 								data.setStateChanged(choseState[0], choseState[1]);
 								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
+								clicked = false;
 							}
 						}
 						else if(data.getTeamData(state, num) == 0) {
+							data.incPlayerThrowCount(turn);
 							numCount = data.getNumData(state, num);
 							data.setPlayerNum(0, data.getPlayerNum(0) + numCount);
 							data.setTeamDataChanged(0);
@@ -71,17 +75,18 @@ public class ControlMain {
 							if(choseState[0] == 3) {
 								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
 								data.setTeamDataChanged(choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
 								clicked = false;
 							}
 							else {
 								data.setStateData(choseState[0], choseState[1], 9, 0);
-								clicked = false;
 								data.setStateChanged(choseState[0], choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
+								clicked = false;
 							}
 						}
 						else if(data.getTeamData(state, num) == 1) {
+							data.incPlayerThrowCount(turn);
 							numCount = data.getNumData(state, num);
 							data.setPlayerNum(1, data.getPlayerNum(1) + numCount);
 							data.setTeamDataChanged(1);
@@ -90,17 +95,18 @@ public class ControlMain {
 							if(choseState[0] == 3) {
 								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
 								data.setTeamDataChanged(choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
 								clicked = false;
 							}
 							else {
 								data.setStateData(choseState[0], choseState[1], 9, 0);
-								clicked = false;
 								data.setStateChanged(choseState[0], choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
+								clicked = false;
 							}
 						}
 						else if(data.getTeamData(state, num) == 2) {
+							data.incPlayerThrowCount(turn);
 							numCount = data.getNumData(state, num);
 							data.setPlayerNum(2, data.getPlayerNum(2) + numCount);
 							data.setTeamDataChanged(2);
@@ -109,17 +115,18 @@ public class ControlMain {
 							if(choseState[0] == 3) {
 								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
 								data.setTeamDataChanged(choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
 								clicked = false;
 							}
 							else {
 								data.setStateData(choseState[0], choseState[1], 9, 0);
-								clicked = false;
 								data.setStateChanged(choseState[0], choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
+								clicked = false;
 							}
 						}
 						else if(data.getTeamData(state, num) == 3) {
+							data.incPlayerThrowCount(turn);
 							numCount = data.getNumData(state, num);
 							data.setPlayerNum(3, data.getPlayerNum(3) + numCount);
 							data.setTeamDataChanged(3);
@@ -128,30 +135,33 @@ public class ControlMain {
 							if(choseState[0] == 3) {
 								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
 								data.setTeamDataChanged(choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
 								clicked = false;
 							}
 							else {
 								data.setStateData(choseState[0], choseState[1], 9, 0);
-								clicked = false;
 								data.setStateChanged(choseState[0], choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
+								clicked = false;
 							}
 						}
 						else {
+							System.out.println("Control Main, choseState[0]: " + choseState[0]);
+							System.out.println("Control Main, choseState[1]: " + choseState[1]);
+							System.out.println("Control Main, data.getTeamData: " + data.getTeamData(choseState[0], choseState[1]));
 							data.setStateData(state, num, data.getTeamData(choseState[0], choseState[1]), data.getNumData(choseState[0], choseState[1]));
 							data.setStateChanged(state, num);
 							if(choseState[0] == 3) {
 								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
 								data.setTeamDataChanged(choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
 								clicked = false;
 							}
 							else {
 								data.setStateData(choseState[0], choseState[1], 9, 0);
-								clicked = false;
 								data.setStateChanged(choseState[0], choseState[1]);
-								data.setStateChanged(state, num);
+								delete.deletUsedMove(state, num);
+								clicked = false;
 							}
 						}
 					}
@@ -161,6 +171,7 @@ public class ControlMain {
 						data.setFinishedStones(turn, numCount);
 						data.setStateData(choseState[0], choseState[1], 9, 0);
 						data.setStateChanged(choseState[0], choseState[1]);
+						delete.deletUsedMove(state, num);
 						clicked = false;
 					}
 				}
@@ -218,8 +229,10 @@ public class ControlMain {
 			stateAction();
 			if(data.getPlayerThrowCount(turn) == 0 && data.checkMoveEmpty(turn)) {
 				//make game end algorithm at here checking by checkEnd
+				data.incPlayerThrowCount(data.getTurn());
 				data.moveTurn();
 			}
 		}
+		System.out.println("turn : " + data.getTurn());
 	}
 }

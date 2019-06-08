@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;Control.DeletMove.java&apos; to &apos;DeleteMove.java&apos;&#x0D;&#x0A;- Original project: &apos;View&apos;&#x0D;&#x0A;- Original element: &apos;Control.DeletMove.java&apos;&#x0D;&#x0A;- Renamed element: &apos;Control.DeleteMove.java&apos;" description="Rename compilation unit &apos;DeletMove.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;Control{DeletMove.java" name="DeleteMove.java" references="false" stamp="1559045710316" version="1.0"/>
+</session>

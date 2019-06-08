@@ -1,6 +1,9 @@
 package View;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import View.ButtonAction;
@@ -29,6 +32,7 @@ public class MapPrint extends JFrame {
 	ImageIcon[] team2StateIcon = new ImageIcon[4];
 	ImageIcon[] team3StateIcon = new ImageIcon[4];
 	ImageIcon[] team4StateIcon = new ImageIcon[4];
+	ImageIcon stateEmpty;
 
 	public void initMapPrint(int numOfPlayers, int numOfStones) {
 		data.initGameData(numOfPlayers, numOfStones);
@@ -112,6 +116,10 @@ public class MapPrint extends JFrame {
 			resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
 			team4StateIcon[i] = new ImageIcon(resizedImage);
 		}
+		icon = new ImageIcon("./state_empty.png");
+		img = icon.getImage();
+		resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
+		stateEmpty = new ImageIcon(resizedImage);
 		
 //이미지 넣은 버튼 생성
 		for(int i = 0; i < 24; i++) {
@@ -168,7 +176,7 @@ public class MapPrint extends JFrame {
 
 		for(int i = 0; i < 24; i++) {
 			//버튼에 이미지 입력
-			normalStateStone[i] = new JButton();
+			normalStateStone[i] = new JButton(stateEmpty);
 			//버튼 배경 삭제
 			normalStateStone[i].setBorderPainted(false);
 			normalStateStone[i].setContentAreaFilled(false);
@@ -176,14 +184,14 @@ public class MapPrint extends JFrame {
 		}
 		for(int i = 0; i < 4; i++) {
 			//버튼에 이미지 입력
-			cornerCenterStateStone[i] = new JButton();
+			cornerCenterStateStone[i] = new JButton(stateEmpty);
 			//버튼 배경 삭제
 			cornerCenterStateStone[i].setBorderPainted(false);
 			cornerCenterStateStone[i].setContentAreaFilled(false);
 			cornerCenterStateStone[i].setFocusPainted(false);
 		}
 		//버튼에 이미지 입력
-		startStateStone = new JButton();
+		startStateStone = new JButton(stateEmpty);
 		//버튼 배경 삭제
 		startStateStone.setBorderPainted(false);
 		startStateStone.setContentAreaFilled(false);
@@ -304,136 +312,141 @@ public class MapPrint extends JFrame {
 		
 		for(int i = 0; i < 29; i++) {
 			if(stateChanged[i]) {
+				System.out.println("stateChanged inside, stateChangedNumber: " + i);
 				if(i == 4 || i == 9 || i == 14 || i == 21) {
 					if(data.getNumData(1, i%4) == 0) {
-						cornerCenterStateStone[i%4].setIcon(null);
+						cornerCenterStateStone[i%4].setIcon(stateEmpty);
 					}
 					else {
 						if(data.getTeamData(1, i%4) == 0) {
-							cornerCenterStateStone[i%4].setIcon(team1StateIcon[data.getNumData(1, i%4)]);
+							cornerCenterStateStone[i%4].setIcon(team1StateIcon[data.getNumData(1, i%4) - 1]);
 						}
 						else if(data.getTeamData(1, i%4) == 1) {
-							cornerCenterStateStone[i%4].setIcon(team2StateIcon[data.getNumData(1, i%4)]);
+							cornerCenterStateStone[i%4].setIcon(team2StateIcon[data.getNumData(1, i%4) - 1]);
 						}
 						else if(data.getTeamData(1, i%4) == 2) {
-							cornerCenterStateStone[i%4].setIcon(team3StateIcon[data.getNumData(1, i%4)]);
+							cornerCenterStateStone[i%4].setIcon(team3StateIcon[data.getNumData(1, i%4) - 1]);
 						}
 						else if(data.getTeamData(1, i%4) == 3) {
-							cornerCenterStateStone[i%4].setIcon(team4StateIcon[data.getNumData(1, i%4)]);
+							cornerCenterStateStone[i%4].setIcon(team4StateIcon[data.getNumData(1, i%4) - 1]);
 						}
 					}
 				}
 				else if(i == 28) {
 					if(data.getNumData(2, 0) == 0) {
-						startState.setIcon(null);
+						startStateStone.setIcon(stateEmpty);
 					}
 					else {
 						if(data.getTeamData(2, 0) == 0) {
-							startState.setIcon(team1StateIcon[data.getNumData(2, 0)]);
+							startStateStone.setIcon(team1StateIcon[data.getNumData(2, 0) - 1]);
 						}
 						else if(data.getTeamData(2, 0) == 1) {
-							startState.setIcon(team2StateIcon[data.getNumData(2, 0)]);
+							startStateStone.setIcon(team2StateIcon[data.getNumData(2, 0) - 1]);
 						}
 						else if(data.getTeamData(2, 0) == 2) {
-							startState.setIcon(team3StateIcon[data.getNumData(2, 0)]);
+							startStateStone.setIcon(team3StateIcon[data.getNumData(2, 0) - 1]);
 						}
 						else if(data.getTeamData(2, 0) == 3) {
-							startState.setIcon(team4StateIcon[data.getNumData(2, 0)]);
+							startStateStone.setIcon(team4StateIcon[data.getNumData(2, 0) - 1]);
 						}
 					}
 				}
 				else if(i >= 0 && i < 4) {
+					System.out.println("Changing image inside1, stateChangedNumber: " + i);
 					if(data.getNumData(0, i) == 0) {
-						normalState[i].setIcon(null);
+						System.out.println("Changing image inside2, stateChangedNumber: " + i);
+						normalStateStone[i].setIcon(stateEmpty);
 					}
 					else {
+						System.out.println("Changing image inside3, TeamData: " + data.getTeamData(0,i));
 						if(data.getTeamData(0, i) == 0) {
-							normalState[i].setIcon(team1StateIcon[data.getNumData(0, i)]);
+							System.out.println("Changing image inside4, data.getNumData: " + data.getNumData(0, i));
+							normalStateStone[i].setIcon(team1StateIcon[data.getNumData(0, i) - 1]);
 						}
 						else if(data.getTeamData(0, i) == 1) {
-							normalState[i].setIcon(team2StateIcon[data.getNumData(0, i)]);
+							normalStateStone[i].setIcon(team2StateIcon[data.getNumData(0, i) - 1]);
 						}
 						else if(data.getTeamData(0, i) == 2) {
-							normalState[i].setIcon(team3StateIcon[data.getNumData(0, i)]);
+							normalStateStone[i].setIcon(team3StateIcon[data.getNumData(0, i) - 1]);
 						}
 						else if(data.getTeamData(0, i) == 3) {
-							normalState[i].setIcon(team4StateIcon[data.getNumData(0, i)]);
+							normalStateStone[i].setIcon(team4StateIcon[data.getNumData(0, i) - 1]);
 						}
 					}
 				}
 				else if(i > 4 && i < 9) {
 					if(data.getNumData(0, i-1) == 0) {
-						normalState[i].setIcon(null);
+						normalStateStone[i-1].setIcon(stateEmpty);
 					}
 					else {
 						if(data.getTeamData(0, i-1) == 0) {
-							normalState[i-1].setIcon(team1StateIcon[data.getNumData(0, i-1)]);
+							normalStateStone[i-1].setIcon(team1StateIcon[data.getNumData(0, i-1) - 1]);
 						}
 						else if(data.getTeamData(0, i-1) == 1) {
-							normalState[i-1].setIcon(team2StateIcon[data.getNumData(0, i-1)]);
+							normalStateStone[i-1].setIcon(team2StateIcon[data.getNumData(0, i-1) - 1]);
 						}
 						else if(data.getTeamData(0, i-1) == 2) {
-							normalState[i-1].setIcon(team3StateIcon[data.getNumData(0, i-1)]);
+							normalStateStone[i-1].setIcon(team3StateIcon[data.getNumData(0, i-1) - 1]);
 						}
 						else if(data.getTeamData(0, i-1) == 3) {
-							normalState[i-1].setIcon(team4StateIcon[data.getNumData(0, i-1)]);
+							normalStateStone[i-1].setIcon(team4StateIcon[data.getNumData(0, i-1) - 1]);
 						}
 					}
 				}
 				else if(i > 9 && i < 14) {
 					if(data.getNumData(0, i-2) == 0) {
-						normalState[i].setIcon(null);
+						normalStateStone[i-2].setIcon(stateEmpty);
 					}
 					else {
 						if(data.getTeamData(0, i-2) == 0) {
-							normalState[i-2].setIcon(team1StateIcon[data.getNumData(0, i-2)]);
+							normalStateStone[i-2].setIcon(team1StateIcon[data.getNumData(0, i-2) - 1]);
 						}
 						else if(data.getTeamData(0, i-2) == 1) {
-							normalState[i-2].setIcon(team2StateIcon[data.getNumData(0, i-2)]);
+							normalStateStone[i-2].setIcon(team2StateIcon[data.getNumData(0, i-2) - 1]);
 						}
 						else if(data.getTeamData(0, i-2) == 2) {
-							normalState[i-2].setIcon(team3StateIcon[data.getNumData(0, i-2)]);
+							normalStateStone[i-2].setIcon(team3StateIcon[data.getNumData(0, i-2) - 1]);
 						}
 						else if(data.getTeamData(0, i-2) == 3) {
-							normalState[i-2].setIcon(team4StateIcon[data.getNumData(0, i-2)]);
+							normalStateStone[i-2].setIcon(team4StateIcon[data.getNumData(0, i-2) - 1]);
 						}
 					}
 				}
 				else if(i > 14 && i < 21) {
 					if(data.getNumData(0, i-3) == 0) {
-						normalState[i].setIcon(null);
+						normalStateStone[i-3].setIcon(stateEmpty);
 					}
 					else {
 						if(data.getTeamData(0, i-3) == 0) {
-							normalState[i-3].setIcon(team1StateIcon[data.getNumData(0, i-3)]);
+							normalStateStone[i-3].setIcon(team1StateIcon[data.getNumData(0, i-3) - 1]);
 						}
 						else if(data.getTeamData(0, i-3) == 1) {
-							normalState[i-3].setIcon(team2StateIcon[data.getNumData(0, i-3)]);
+							normalStateStone[i-3].setIcon(team2StateIcon[data.getNumData(0, i-3) - 1]);
 						}
 						else if(data.getTeamData(0, i-3) == 2) {
-							normalState[i-3].setIcon(team3StateIcon[data.getNumData(0, i-3)]);
+							normalStateStone[i-3].setIcon(team3StateIcon[data.getNumData(0, i-3) - 1]);
 						}
 						else if(data.getTeamData(0, i-3) == 3) {
-							normalState[i-3].setIcon(team4StateIcon[data.getNumData(0, i-3)]);
+							normalStateStone[i-3].setIcon(team4StateIcon[data.getNumData(0, i-3) - 1]);
 						}
 					}
 				}
 				else if(i > 21 && i < 28) {
 					if(data.getNumData(0, i-4) == 0) {
-						normalState[i].setIcon(null);
+						normalStateStone[i-4].setIcon(stateEmpty);
 					}
 					else {
 						if(data.getTeamData(0, i-4) == 0) {
-							normalState[i-4].setIcon(team1StateIcon[data.getNumData(0, i-4)]);
+							normalStateStone[i-4].setIcon(team1StateIcon[data.getNumData(0, i-4) - 1]);
 						}
 						else if(data.getTeamData(0, i-4) == 1) {
-							normalState[i-4].setIcon(team2StateIcon[data.getNumData(0, i-4)]);
+							normalStateStone[i-4].setIcon(team2StateIcon[data.getNumData(0, i-4) - 1]);
 						}
 						else if(data.getTeamData(0, i-4) == 2) {
-							normalState[i-4].setIcon(team3StateIcon[data.getNumData(0, i-4)]);
+							normalStateStone[i-4].setIcon(team3StateIcon[data.getNumData(0, i-4) - 1]);
 						}
 						else if(data.getTeamData(0, i-4) == 3) {
-							normalState[i-4].setIcon(team4StateIcon[data.getNumData(0, i-4)]);
+							normalStateStone[i-4].setIcon(team4StateIcon[data.getNumData(0, i-4) - 1]);
 						}
 					}
 				}
@@ -445,5 +458,74 @@ public class MapPrint extends JFrame {
 				playerInfo[i].setIcon(teamIcon[data.getPlayerNum(i) + 5*i]);
 			}
 		}
+	}
+}
+
+class SelectPosition implements ActionListener{
+	JButton[] getPositionButton;
+	JFrame selectFrame;
+	int selected;
+	
+	void initSelcetAction(JButton[] getPositionButton, JFrame selectFrame, int selected) {
+		this.getPositionButton =  getPositionButton;
+		this.selectFrame = selectFrame;
+		this.selected = selected;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(getPositionButton[0])) {
+				selected = 0;
+				System.out.println("selected number: 0");
+		}
+		else if(e.getSource().equals(getPositionButton[1])) {
+			selected = 1;
+			System.out.println("selected number: 1");
+		}
+		else if(e.getSource().equals(getPositionButton[2])) {
+			selected = 2;
+			System.out.println("selected number: 2");
+		}
+		else if(e.getSource().equals(getPositionButton[3])) {
+			selected = 3;
+			System.out.println("selected number: 3");
+		}
+		else if(e.getSource().equals(getPositionButton[4])) {
+			selected = 4;
+			System.out.println("selected number: 4");
+		}
+		selectFrame.dispose();
+		GameData data = GameData.getInstance();
+		data.setSelcetedPos(selected);
+	}
+}
+
+class GetPosition extends JFrame{
+	JButton[] getSelectButton = new JButton[5];
+	int selected;
+	
+	void setPositionFrame() {
+		this.setTitle("Select Yut Position");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container gamePanel = getContentPane();
+		gamePanel.setLayout(null);
+		
+		getSelectButton[0] = new JButton("Do");
+		getSelectButton[1] = new JButton("Gae");
+		getSelectButton[2] = new JButton("Goel");
+		getSelectButton[3] = new JButton("Yut");
+		getSelectButton[4] = new JButton("Mo");
+		
+		SelectPosition position = new SelectPosition();
+		position.initSelcetAction(getSelectButton, this, selected);
+		
+		for(int i = 0; i < 5; i++) {
+			getSelectButton[i].addActionListener(position);
+			getSelectButton[i].setBounds(16 + 116*i, 100, 100, 50);
+			gamePanel.add(getSelectButton[i]);
+		}
+		gamePanel.setBackground(Color.white);
+		this.setSize(600, 300);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
 	}
 }

@@ -1,0 +1,13 @@
+package Control;
+
+import Model.GameData;
+
+public class DeletMove {
+
+	
+	
+	public void deletUsedMove(int state, int num) {
+		
+	}
+	
+}

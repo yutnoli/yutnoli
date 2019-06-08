@@ -55,6 +55,7 @@ public class GameData {
 	private PlayerData[] player = new PlayerData[4]; 
 	private int[] yut = new int[4];//0 means round part, 1 means flat part
 	private int turn;
+	private int selected;
 	private int[] stateChose = new int[2];
 	private boolean[] validPlace = new boolean[30];
 	private boolean[] stateChanged = new boolean[29];
@@ -114,19 +115,34 @@ public class GameData {
 			return cornerCenterState[num].team;
 		else if(state == 2)
 			return startState.team;
-		else
-			return 9;
+		else if(state == 3) {
+			if(num == 0)
+				return 0;
+			else if(num == 1)
+				return 1;
+			else if(num == 2)
+				return 2;
+			else if(num == 3)
+				return 3;
+		}
+		return 9;
 	}
 	
 	public int getNumData(int state, int num) {
-		if(state == 0)
+		System.out.println("1state: " + state);
+		if(state == 0) {
+			System.out.println("normalStateNumber: " + normalState[num].number);
 			return normalState[num].number;
+		}
 		else if(state == 1)
 			return cornerCenterState[num].number;
 		else if(state == 2)
 			return startState.number;
-		else
-			return 9;
+		else if(state == 3) {
+			if(player[num].number != 0)
+				return 1;
+		}
+		return 9;
 	}
 //set state data
 	public void setStateData(int state, int num, int team, int numToChange) {
@@ -216,6 +232,7 @@ public class GameData {
 	}
 //move turn
 	public void moveTurn() {
+		System.out.println("numberOfPlayers: " + numberOfPlayers);
 		turn = (turn+1)%numberOfPlayers;
 	}
 //get chose state
@@ -378,4 +395,13 @@ public class GameData {
 			}
 		}
 	}
+	
+	public int getSelectedPos() {
+		return selected;
+	}
+	
+	public void setSelcetedPos(int num) {
+		selected = num;
+	}
 }
+
