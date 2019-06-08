@@ -1,0 +1,32 @@
+package View;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+public class MapPrint extends JFrame {
+	JPanel statePanel = new JPanel();
+	JButton normalState;
+	
+	public void testImage() {
+		this.setTitle("Yutnoli");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container gamePanel = getContentPane();
+		gamePanel.setLayout(null);
+		
+//이미지를 버튼의 크기에 맞게 조절하는 부분
+		ImageIcon icon = new ImageIcon("./normal_state.png");
+		Image img = icon.getImage();
+		Image resizedImage = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon resizedIcon = new ImageIcon(resizedImage);
+		
+		
+		normalState = new JButton(resizedIcon);
+		normalState.setBounds(100, 100, 50, 50);
+		gamePanel.add(normalState);
+		gamePanel.setBackground(Color.white);
+		this.setSize(1000, 1000);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

@@ -1,0 +1,27 @@
+package View;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+public class MapPrint extends JFrame {
+	JPanel statePanel = new JPanel();
+	JButton normalState = new JButton(new ImageIcon("./normal_state.png"));
+	
+	public void testImage() {
+		this.setTitle("Yutnoli");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container gamePanel = getContentPane();
+		gamePanel.setLayout(null);
+//		statePanel.setLayout(new GridLayout(1, 1) );
+//		statePanel.setLocation(100, 100);
+//		statePanel.setSize(50, 50);
+		normalState.setBounds(100, 100, 50, 50);
+//		statePanel.add(normalState);
+		gamePanel.add(normalState);
+		gamePanel.setBackground(Color.white);
+		this.setSize(1000, 1000);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}

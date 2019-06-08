@@ -1,0 +1,62 @@
+package View;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+public class MapPrint extends JFrame {
+	JButton normalState;
+	JButton cornerCenterState;
+	JButton startState;
+	
+	public void testImage() {
+		this.setTitle("Yutnoli");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container gamePanel = getContentPane();
+		gamePanel.setLayout(null);
+		
+//이미지를 버튼의 크기에 맞게 조절하는 부분
+		//normalState Image
+		ImageIcon icon = new ImageIcon("./normal_state.png");
+		Image img = icon.getImage();
+		Image resizedImage = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		ImageIcon resizedIconN = new ImageIcon(resizedImage);
+		//cornerCenterState Image
+		icon = new ImageIcon("./corner_center_state.png");
+		img = icon.getImage();
+		resizedImage = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		ImageIcon resizedIconC = new ImageIcon(resizedImage);
+		//startState Image
+		icon = new ImageIcon("./start_state.png");
+		img = icon.getImage();
+		resizedImage = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		ImageIcon resizedIconS = new ImageIcon(resizedImage);
+		
+//이미지 넣은 버튼 생성
+		//버튼에 이미지 입력
+		normalState = new JButton(resizedIconN);
+		cornerCenterState = new JButton(resizedIconC);
+		startState = new JButton(resizedIconS);
+		//버튼 배경 삭제
+		normalState.setBorderPainted(false);
+		normalState.setContentAreaFilled(false);
+		normalState.setFocusPainted(false);
+		cornerCenterState.setBorderPainted(false);
+		cornerCenterState.setContentAreaFilled(false);
+		cornerCenterState.setFocusPainted(false);
+		startState.setBorderPainted(false);
+		startState.setContentAreaFilled(false);
+		startState.setFocusPainted(false);
+		
+		normalState.setBounds(100, 100, 50, 50);
+		cornerCenterState.setBounds(200, 200, 100, 100);
+		startState.setBounds(400, 400, 100, 100);
+		gamePanel.add(normalState);
+		gamePanel.add(cornerCenterState);
+		gamePanel.add(startState);
+		gamePanel.setBackground(Color.white);
+		this.setSize(1000, 1000);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}
