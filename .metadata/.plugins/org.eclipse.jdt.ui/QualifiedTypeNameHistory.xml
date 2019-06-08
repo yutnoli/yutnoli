@@ -12,9 +12,8 @@
 <fullyQualifiedTypeName name="Control.ThrowingYut"/>
 <fullyQualifiedTypeName name="Model.PlayerData"/>
 <fullyQualifiedTypeName name="Control.StateExpressionChange"/>
+<fullyQualifiedTypeName name="Control.ControlMain"/>
 <fullyQualifiedTypeName name="Model.GameData"/>
 <fullyQualifiedTypeName name="View.GetInitData"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="Control.DeleteMove"/>
-<fullyQualifiedTypeName name="Control.ControlMain"/>
 </qualifiedTypeNameHistroy>
