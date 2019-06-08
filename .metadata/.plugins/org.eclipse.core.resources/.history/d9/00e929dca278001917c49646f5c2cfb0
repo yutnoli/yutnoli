@@ -58,7 +58,6 @@ public class GameData {
 		for (int i = 0; i < this.numberOfPlayers; i++) {
 			player[i].team = i;
 			player[i].number = this.numberOfStones;
-			player[i].throwCount = 1;
 		}
 	}
 	
@@ -121,48 +120,11 @@ public class GameData {
 		startState.number = val;
 	}
 //get player data	
-	public int getPlayerData(int team) {
-		return player[team].number;
+	public int getPlayerData(int num) {
+		return player[num].number;
 	}
 //set player data
-	public void setPlayerData(int team, int val) {
-		player[team].number = val;
-	}
-//get player throwCount
-	public int getPlayerThrowCount(int team) {
-		return player[team].throwCount;
-	}
-//set player throwCount
-	public void setPlayerThrowCount(int team, int val) {
-		player[team].throwCount = val;
-	}
-//increase player throwCount
-	public void incPlayerThrowCount(int team) {
-		player[team].throwCount++;
-	}
-//decrease player throwCount
-	public void decPlayerCount(int team) {
-		player[team].throwCount--;
-	}
-//find player move
-	public boolean findPlayerMove(int team, int move) {
-		return player[team].findMove(move);
-	}
-//add player move
-	public void addPlayerMove(int team, int move) {
-		player[team].moves.add(move);
-	}
-//remove player move
-	public boolean removePlayerMove(int team, int move) {
-		Iterator<Integer> it = player[team].moves.iterator();
-		while(it.hasNext()) {
-			int val = (int)it.next();
-			if (val == move) {
-				it.remove();
-				return true;
-			}
-		}
-		return false;
-	}
-	
+	public void setPlayerData(int num, int val) {
+		player[num].number = val;
+	}	
 }
