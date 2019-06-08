@@ -1,0 +1,15 @@
+package View;
+
+import javax.swing.*;
+import View.MapPrint;
+
+public class GameMain{
+	int numOfPlayer;
+	int numOfStone;
+	public static void main(String[] args) {
+		JFrame getPlayer = new JFrame;
+		MapPrint mainMap = new MapPrint();
+		mainMap.testImage();
+	}
+
+}

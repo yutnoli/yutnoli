@@ -10,17 +10,17 @@ import javax.swing.JOptionPane;
 public class ButtonAction implements ActionListener{
 	JButton[] normalState;
 	JButton[] cornerCenterState;
+	JButton[] playerInfo;
 	JButton startState;
-	JButton newStone;
 	JButton endStone;
 	JButton throwYutRandom;
 	JButton throwYutSelect;
 	
-	public ButtonAction(JButton[] normalState, JButton[] cornerCenterState, JButton startState, JButton newStone, JButton endStone, JButton throwYutRandom, JButton throwYutSelect){
+	public ButtonAction(JButton[] normalState, JButton[] cornerCenterState, JButton startState, JButton[] playerInfo, JButton endStone, JButton throwYutRandom, JButton throwYutSelect){
 		this.normalState = normalState;
 		this.cornerCenterState = cornerCenterState;
 		this.startState = startState;
-		this.newStone = newStone;
+		this.playerInfo = playerInfo;
 		this.endStone = endStone;
 		this.throwYutRandom = throwYutRandom;
 		this.throwYutSelect = throwYutSelect;
@@ -43,12 +43,15 @@ public class ButtonAction implements ActionListener{
 			}
 		}
 
-		if(e.getSource().equals(startState)) {
-			System.out.println("startState가 눌렸습니다!!");
+		for(int i = 0; !find && i < 4; i++) {
+			if(e.getSource().equals(playerInfo[i])) {
+				System.out.println("player " + i + "번 버튼이 눌렸습니다!!");
+				find = true;
+			}
 		}
 		
-		else if(e.getSource().equals(newStone)) {
-			System.out.println("newStone 버튼이 눌렸습니다!!");
+		if(e.getSource().equals(startState)) {
+			System.out.println("startState가 눌렸습니다!!");
 		}
 		
 		else if(e.getSource().equals(endStone)) {

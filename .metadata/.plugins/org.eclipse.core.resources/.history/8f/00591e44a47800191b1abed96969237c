@@ -1,8 +1,0 @@
-package Control;
-
-import Model.GameData;
-
-public class CheckFlow {
-	private boolean[] clicked = new boolean[4];
-		
-}

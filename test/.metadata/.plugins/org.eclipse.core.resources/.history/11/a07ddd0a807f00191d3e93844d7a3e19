@@ -1,0 +1,74 @@
+package View;
+
+import java.awt.*;
+import javax.swing.*;
+import View.MapPrint;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+class GameMainAction implements ActionListener{
+	JButton[] getPlayerButton;
+	JFrame initFrame;
+	int numOfPlayer;
+	int numOfStone;
+	
+	public GameMainAction(JButton[] getPlayerButton, JFrame initFrame) {
+		this.getPlayerButton =  getPlayerButton;
+		this.initFrame = initFrame;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(getPlayerButton[0])) {
+				numOfPlayer = 2;
+				System.out.println("player number: 2");
+		}
+		else if(e.getSource().equals(getPlayerButton[1])) {
+			numOfPlayer = 3;
+			System.out.println("player number: 3");
+		}
+		else if(e.getSource().equals(getPlayerButton[2])) {
+			numOfPlayer = 4;
+			System.out.println("player number: 4");
+		}
+		initFrame.dispose();
+		MapPrint mainMap = new MapPrint();
+		mainMap.testImage();
+	}
+}
+		
+class InitGamePlayer extends JFrame{
+	JButton[] getPlayerButton = new JButton[3];
+	
+	void gameInitFrame() {
+		this.setTitle("Yutnoli");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container gamePanel = getContentPane();
+		gamePanel.setLayout(null);
+			
+		for(int i = 0; i < 3; i++) {
+			getPlayerButton[i] = new JButton((i+2)+"Players");
+		}
+		
+		GameMainAction action = new GameMainAction(getPlayerButton, this);
+		
+		for(int i = 0; i < 3; i++) {
+			getPlayerButton[i].addActionListener(action);
+			getPlayerButton[i].setBounds(70 + 170*i, 100, 100, 50);
+			gamePanel.add(getPlayerButton[i]);
+		}
+		
+		this.setSize(600, 300);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+}
+
+
+public class GameMain{
+	
+	public static void main(String[] args) {
+		InitGame initGame = new InitGame();
+		initGame.gameInitFrame();
+	}
+}

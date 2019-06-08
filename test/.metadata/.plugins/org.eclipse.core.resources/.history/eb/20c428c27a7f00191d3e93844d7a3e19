@@ -1,0 +1,74 @@
+package View;
+
+import java.awt.*;
+import javax.swing.*;
+import View.MapPrint;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+class GameMainAction implements ActionListener{
+	JButton[] getPlayerButton;
+	int numOfPlayer;
+	int numOfStone;
+	
+	public GameMainAction(JButton[] getPlayerButton) {
+		this.getPlayerButton =  getPlayerButton;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(getPlayerButton[0])) {
+				numOfPlayer = 2;
+		}
+		else if(e.getSource().equals(getPlayerButton[1])) {
+			numOfPlayer = 3;
+		}
+		else if(e.getSource().equals(getPlayerButton[2])) {
+			numOfPlayer = 4;
+		}
+		dispose();
+	}
+}
+		
+class InitGame{
+	JButton[] getPlayerButton = new JButton[3];
+	
+	void gameInitFrame() {
+		JFrame getPlayer = new JFrame();
+		getPlayer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel gamePanel = new JPanel();
+		gamePanel.setLayout(null);
+			
+		for(int i = 0; i < 3; i++) {
+			getPlayerButton[i] = new JButton((i+2)+"Players");
+		}
+		
+		GameMainAction action = new GameMainAction(getPlayerButton);
+		
+		for(int i = 0; i < 3; i++) {
+			getPlayerButton[i].addActionListener(action);
+			getPlayerButton[i].setBounds(10 + 10*i, 120, 80, 50);
+			gamePanel.add(getPlayerButton[i]);
+		}
+		
+		getPlayer.add(gamePanel);
+		
+		getPlayer.setSize(300, 150);
+		getPlayer.setLocationRelativeTo(null);
+		getPlayer.setVisible(true);
+	}
+}
+
+
+public class GameMain{
+	
+	
+	public static void main(String[] args) {
+		
+		gameInitFrame();
+		
+		MapPrint mainMap = new MapPrint();
+		mainMap.testImage();
+	}
+
+}

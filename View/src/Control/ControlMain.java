@@ -13,10 +13,6 @@ public class ControlMain {
 	int num;
 	int throwOption;
 	int selected;
-	
-	public void initControlMain(int numOfPlayers, int numOfStones) {
-		data.initGameData(numOfPlayers, numOfStones);
-	}
 
 //if other button added overload right below function	
 	void stateAction() {//receive state button action
@@ -84,10 +80,11 @@ public class ControlMain {
 		return 9;
 	}
 	
-	public void recieveStateAction(int state, int num) {
+	public int recieveStateAction(int state, int num) {
 		this.state = state;
 		this.num = num;
 		mainFlow(1);
+		return checkGameEnd();
 	}
 	
 	public void recieveThrowAction(int option) {
@@ -98,11 +95,11 @@ public class ControlMain {
 	public void recieveThrowAction(int option, int selected) {
 		this.throwOption = option;
 		this.selected = selected;
+		mainFlow(0);
 	}
 	
 	void mainFlow(int recieveAction) {//recieveAction '0' means throw action, '1' means state action.
 		//In this function there should be included moveTurn function.
-		int checkEnd = 9;
 		turn = data.getTurn();
 		if(recieveAction == 0) {
 			if(data.getPlayerThrowCount(turn)>0) {
@@ -112,7 +109,6 @@ public class ControlMain {
 		else if(recieveAction == 1) {
 			stateAction();
 			if(data.getPlayerThrowCount(turn) == 0 && data.checkMoveEmpty(turn)) {
-				checkEnd = checkGameEnd();
 				//make game end algorithm at here checking by checkEnd
 				data.moveTurn();
 			}
