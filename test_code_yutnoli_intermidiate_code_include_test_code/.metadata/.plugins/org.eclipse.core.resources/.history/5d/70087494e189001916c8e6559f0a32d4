@@ -1,0 +1,58 @@
+package test.unit;
+
+import Model.StateData;
+import java.util.Iterator;
+
+import javax.naming.NameNotFoundException;
+
+import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import junit.framework.JUnit4TestAdapter;
+
+public class TestStateData {
+	private StateData stateData; // test fixture variable.
+	
+	/* setUp method using @Before syntax. */
+	/* @Before methods are run before each test. */
+	/* initializes test fixture variables(stateData). */
+	@Before 
+	public void runBeforeFindMoveTest(){
+		System.out.println("Before testing.");
+		stateData = new StateData();
+	}
+	
+	/* check if essential member variables of PlayerData Class exists 
+	 * and if shortly after creating the object, the member variables are initialized correctly. */
+	@Test
+	public void testInitialMemberVars(){
+		assertEquals(9, stateData.getTeam());
+		assertEquals(0, stateData.getNumber());
+	}
+	
+//	/* check if delete member variables themselves of PlayerData that must have these variables 'team', 'number', 'throwCount', 'finish'.
+//	 * or if rename these member variables. */
+//	@Test
+//	public void testMemberVars() {
+//		playerData.getTeam();
+//		playerData.getNumber();
+//		playerData.getThrowCount();
+//		playerData.getFinish();
+//	}
+	
+	/* tear-down method using @After. */
+	/* @After methods are run after each test. */
+	/* frees test fixture variables(stateData). */
+	@After 
+	public void runAfterFindMoveTest() {
+		System.out.println("After testing.");
+		
+		/* execute garbage collection. */
+		System.gc();
+		stateData = null;
+	}
+	
+}

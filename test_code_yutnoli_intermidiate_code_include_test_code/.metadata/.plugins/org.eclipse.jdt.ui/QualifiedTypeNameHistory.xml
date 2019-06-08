@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
+<fullyQualifiedTypeName name="java.awt.ActiveEvent"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="View.ButtonAction"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="javax.management.modelmbean.ModelMBean"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="Control.ThrowingYut"/>
+<fullyQualifiedTypeName name="Model.PlayerData"/>
+<fullyQualifiedTypeName name="Control.StateExpressionChange"/>
+<fullyQualifiedTypeName name="Model.GameData"/>
+<fullyQualifiedTypeName name="View.GetInitData"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="Control.DeleteMove"/>
+<fullyQualifiedTypeName name="Control.ControlMain"/>
+</qualifiedTypeNameHistroy>

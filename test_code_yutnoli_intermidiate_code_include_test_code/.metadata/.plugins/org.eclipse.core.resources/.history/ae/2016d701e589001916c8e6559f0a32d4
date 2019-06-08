@@ -1,0 +1,72 @@
+package test.unit;
+
+import Control.StateExpressionChange;
+import java.util.Iterator;
+
+import javax.naming.NameNotFoundException;
+
+import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import junit.framework.JUnit4TestAdapter;
+
+public class TestStateExpressionChange {
+	private StateExpressionChange stateExpressionChange; // test fixture variable.
+	
+	/* setUp method using @Before syntax. */
+	/* @Before methods are run before each test. */
+	/* initializes test fixture variables(controlMain). */
+	@Before 
+	public void runBeforeEachTest(){
+		System.out.println("Before testing.");
+		StateExpressionChange stateExpressionChange
+											= new StateExpressionChange();
+	}
+	
+	/* check if convertOr2Seq works correctly. */
+	@Test 
+	public void testconvertOr2Seq(){
+		for(int i = 0; i < 24; i++) {
+			if(i >=0 && i<4) {
+				assertEquals(i + 1, convertOr2Seq(0, i));
+			}
+			else if(num>3 && num<8) {
+				return num + 2;
+			}
+			else if (num > 7 && num <12) {
+				return num + 3;
+			}
+			else if (num > 11 && num < 16) {
+				return num + 4;
+			}
+			else if (num > 15 && num < 18) {
+				return num + 7;
+			}
+			else if (num > 17 && num < 20) {
+				return num + 8;
+			}
+			else if (num > 19 && num < 22) {
+				return num + 16;
+			}
+			else if (num > 21 && num < 24) {
+				return num + 17;
+			}
+		}
+	}
+	
+	/* tear-down method using @After. */
+	/* @After methods are run after each test. */
+	/* frees test fixture variables(controlMain). */
+	@After 
+	public void runAfterFindEachTest() {
+		System.out.println("After testing.");
+		
+		/* execute garbage collection. */
+		System.gc();
+		playerData = null;
+	}
+	
+}

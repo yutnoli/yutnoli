@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestStateData" project="View" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="test.unit.TestStateData" time="0.0">
+    <testcase name="testFindMove" classname="test.unit.TestStateData" time="0.0"/>
+    <testcase name="testInitialMemberVars" classname="test.unit.TestStateData" time="0.0"/>
+  </testsuite>
+</testrun>

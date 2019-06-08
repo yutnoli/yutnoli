@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+/home/kyeongtae/바탕화면/김경태/강의/3학년 1학기/소프트웨어 공학/yutnoli_intermidiate_includedls/.metadata/.plugins/org.eclipse.jdt.core
+2076951439.index
+4198012004.index
+646308851.index
+4116637673.index

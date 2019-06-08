@@ -1,0 +1,41 @@
+package test.unit;
+
+import Model.PlayerData;
+import java.util.Iterator;
+import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import junit.framework.JUnit4TestAdapter;
+
+public class TestStateData {
+	private PlayerData playerData; // test fixture variable.
+	
+	/* setUp method using @Before syntax. */
+	/* @Before methods are run before each test. */
+	/* initializes text feature variables. */
+	@Before 
+	public void runBeforeFindMoveTest(){
+		System.out.println("Before testing.");
+		playerData = new PlayerData();
+	}
+	
+	@Test 
+	public void testFindMove(){
+		playerData.moves.add(1);
+		
+	}
+	
+	@After 
+	public void runAfterFindMoveTest() {
+		System.out.println("After testing.");
+		
+		/* execute garbage collection. */
+		System.gc();
+		playerData = null;
+		
+	}
+	
+}

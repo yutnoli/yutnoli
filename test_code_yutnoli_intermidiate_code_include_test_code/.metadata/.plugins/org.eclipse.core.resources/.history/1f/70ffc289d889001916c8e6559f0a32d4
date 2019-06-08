@@ -1,0 +1,69 @@
+package test.unit;
+
+import Model.GameData;
+import java.util.Iterator;
+
+import javax.naming.NameNotFoundException;
+
+import java.util.ArrayList;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import junit.framework.JUnit4TestAdapter;
+
+public class TestGameData {
+	private GameData gameData; // test fixture variable.
+	
+	/* setUp method using @Before syntax. */
+	/* @Before methods are run before each test. */
+	/* initializes test fixture variables(gameData). */
+	@Before 
+	public void runBeforeFindMoveTest(){
+		System.out.println("Before testing.");
+		gameData = GameData.getInstance();
+	}
+	
+	
+//	/* check if delete member variables themselves of PlayerData that must have these variables 'team', 'number', 'throwCount', 'finish'.
+//	 * or if rename these member variables. */
+//	@Test
+//	public void testMemberVars() {
+//		playerData.getTeam();
+//		playerData.getNumber();
+//		playerData.getThrowCount();
+//		playerData.getFinish();
+//	}
+	
+	/* check if GameData class is applied singleton pattern. */
+	@Test(expected = Exception.class)
+	public void testMemberVars() {
+		GameData gameDataTemp = new GameData(); 
+	}
+	
+	/* check if initGameData works correctly. */
+	@Test 
+	public void testInitGameData(){
+		gameData.initGameData(3, 5);
+		assertEquals(3, gameData.getNumOfPlayers());
+		assertEquals(5, gameData.getNumOfPlayers());
+		
+		gameData.initGameData(2, 1);
+		assertEquals(3, gameData.getNumOfPlayers());
+		assertEquals(5, gameData.getNumOfPlayers());
+	}
+	
+	/* tear-down method using @After. */
+	/* @After methods are run after each test. */
+	/* frees test fixture variables(gameData). */
+	@After 
+	public void runAfterFindMoveTest() {
+		System.out.println("After testing.");
+		
+		/* execute garbage collection. */
+		System.gc();
+		gameData = null;
+	}
+	
+}

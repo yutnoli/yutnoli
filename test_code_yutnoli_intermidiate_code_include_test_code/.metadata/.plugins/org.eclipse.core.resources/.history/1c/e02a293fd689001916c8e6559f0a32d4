@@ -1,0 +1,19 @@
+package Model;
+
+public class StateData{
+	int team;
+	int number;
+	
+	public StateData() {
+		this.team = 9;//9 means state empty
+		this.number = 0;
+	}
+	
+	public int getTeam() {
+		return team;
+	}
+	
+	public int getNumber() {
+		return number;
+	}
+}
