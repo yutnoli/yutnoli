@@ -80,14 +80,6 @@ public class GameData {
 			player[i].team = i;
 			player[i].number = this.numberOfStones;
 		}
-		
-		for(int i = 0; i < 24; i++) {
-			normalState[i] = new StateData();
-		}
-		for(int i = 0; i < 4; i++) {
-			cornerCenterState[i] = new StateData();
-		}
-		startState = new StateData();
 	}
 	
 //get # of players
@@ -228,7 +220,6 @@ public class GameData {
 	}
 //set chose state
 	public void setChoseState(int state, int num) {
-		System.out.println("function setChoseState");
 		stateChose[0] = state;
 		stateChose[1] = num;
 	}

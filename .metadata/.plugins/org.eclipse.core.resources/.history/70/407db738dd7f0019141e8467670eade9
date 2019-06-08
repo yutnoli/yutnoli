@@ -31,9 +31,7 @@ public class ControlMain {
 				}
 				else if(state == 3) {//newStone state //num means team
 					if(num == turn) {
-						System.out.println("state == 3 if statement inside, first if");
 						if(data.getPlayerNum(num) != 0) {
-							System.out.println("state == 3 if statement inside, second if");
 							data.setChoseState(3, num);
 							clicked = true;
 						}

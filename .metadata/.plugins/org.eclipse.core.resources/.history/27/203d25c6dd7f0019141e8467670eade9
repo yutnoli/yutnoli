@@ -40,6 +40,7 @@ public class ButtonAction implements ActionListener{
 				controler.recieveStateAction(0, i);
 				mapPrint.playerDataImageChange();
 				mapPrint.yutImageChange();
+				//mapPrint.repaint();
 				find = true;
 			}
 		}
@@ -61,7 +62,6 @@ public class ButtonAction implements ActionListener{
 				mapPrint.playerDataImageChange();
 				mapPrint.yutImageChange();
 				find = true;
-				System.out.println("Action finished");
 			}
 		}
 		

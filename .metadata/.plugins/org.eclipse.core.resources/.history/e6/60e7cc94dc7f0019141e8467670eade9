@@ -20,7 +20,6 @@ public class ControlMain {
 		int[] choseState = new int[2];
 		choseState[0] = data.getChoseStateST();
 		choseState[1] = data.getChoseStateNU();
-		System.out.println("function stateAction");
 		if(!data.checkMoveEmpty(turn)) {
 			if(!clicked) {//first click
 				if (state >= 0 && state < 3) {//normal state
@@ -31,9 +30,7 @@ public class ControlMain {
 				}
 				else if(state == 3) {//newStone state //num means team
 					if(num == turn) {
-						System.out.println("state == 3 if statement inside, first if");
 						if(data.getPlayerNum(num) != 0) {
-							System.out.println("state == 3 if statement inside, second if");
 							data.setChoseState(3, num);
 							clicked = true;
 						}
@@ -189,7 +186,6 @@ public class ControlMain {
 	public int recieveStateAction(int state, int num) {
 		this.state = state;
 		this.num = num;
-		System.out.println("function recieveStateAction");
 		mainFlow(1);
 		return checkGameEnd();
 	}
@@ -214,7 +210,6 @@ public class ControlMain {
 			}
 		}
 		else if(recieveAction == 1) {
-			System.out.println("function mainFlow");
 			stateAction();
 			if(data.getPlayerThrowCount(turn) == 0 && data.checkMoveEmpty(turn)) {
 				//make game end algorithm at here checking by checkEnd

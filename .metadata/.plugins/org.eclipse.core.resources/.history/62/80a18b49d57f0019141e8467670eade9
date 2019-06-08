@@ -52,7 +52,7 @@ public class GameData {
 	private StateData startState = new StateData();
 	private int numberOfPlayers;
 	private int numberOfStones;
-	private PlayerData[] player = new PlayerData[4]; 
+	private PlayerData[] player; 
 	private int[] yut = new int[4];//0 means round part, 1 means flat part
 	private int turn;
 	private int[] stateChose = new int[2];
@@ -73,21 +73,12 @@ public class GameData {
 		this.turn = 0;
 		for(int i = 0; i < 4; i++) {
 			this.yut[i] = 0;
-			player[i] = new PlayerData();
 		}
-
+		player = new PlayerData[4];
 		for (int i = 0; i < this.numberOfPlayers; i++) {
 			player[i].team = i;
 			player[i].number = this.numberOfStones;
 		}
-		
-		for(int i = 0; i < 24; i++) {
-			normalState[i] = new StateData();
-		}
-		for(int i = 0; i < 4; i++) {
-			cornerCenterState[i] = new StateData();
-		}
-		startState = new StateData();
 	}
 	
 //get # of players
@@ -228,7 +219,6 @@ public class GameData {
 	}
 //set chose state
 	public void setChoseState(int state, int num) {
-		System.out.println("function setChoseState");
 		stateChose[0] = state;
 		stateChose[1] = num;
 	}

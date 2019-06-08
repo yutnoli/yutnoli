@@ -228,7 +228,6 @@ public class GameData {
 	}
 //set chose state
 	public void setChoseState(int state, int num) {
-		System.out.println("function setChoseState");
 		stateChose[0] = state;
 		stateChose[1] = num;
 	}

@@ -4,7 +4,7 @@ import Model.GameData;
 
 public class ValidPlace {
 	GameData data = GameData.getInstance();
-	int [] choseState = new int[2];
+	int [] choseState;
 	boolean[] playerMove = new boolean[5];
 	
 	void setValidPlaceMap(int state, int num) {
@@ -14,8 +14,10 @@ public class ValidPlace {
 			playerMove[i] = false;
 		}
 		for (int i = 0; i < 5; i++) {//get player's move data
-			if(data.findPlayerMove(data.getTurn(), i))
+			for (int j = 0; j < 3; j++) {
+				if(data.findPlayerMove(data.getTeamData(j, choseState[1]), i))
 				playerMove[i] = true;
+			}
 		}
 		//check chose state
 		if(playerMove[0]) {

@@ -189,7 +189,7 @@ public class MapPrint extends JFrame {
 		startStateStone.setContentAreaFilled(false);
 		startStateStone.setFocusPainted(false);
 		
-		mapClicked =  new ButtonAction(this, normalState, cornerCenterState, startState, playerInfo, endStone, throwYutRandom, throwYutselect);
+		mapClicked =  new ButtonAction(normalState, cornerCenterState, startState, playerInfo, endStone, throwYutRandom, throwYutselect);
 		for(int i = 0; i < 24; i++) {
 			normalState[i].addActionListener(mapClicked);
 		}
@@ -296,7 +296,7 @@ public class MapPrint extends JFrame {
 		}
 	}
 	
-	public void playerDataImageChange() {
+	public void playerDataChange() {
 		boolean[] stateChanged;
 		boolean[] teamDataChanged;
 		stateChanged = data.getStateChanged();
