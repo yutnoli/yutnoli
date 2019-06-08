@@ -10,8 +10,8 @@
 <fullyQualifiedTypeName name="javax.management.modelmbean.ModelMBean"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="Control.ThrowingYut"/>
-<fullyQualifiedTypeName name="Control.ControlMain"/>
 <fullyQualifiedTypeName name="Model.PlayerData"/>
 <fullyQualifiedTypeName name="Control.StateExpressionChange"/>
 <fullyQualifiedTypeName name="Model.GameData"/>
+<fullyQualifiedTypeName name="Control.ControlMain"/>
 </qualifiedTypeNameHistroy>

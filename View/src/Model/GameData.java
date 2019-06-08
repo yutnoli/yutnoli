@@ -179,6 +179,7 @@ public class GameData {
 //increase player throwCount
 	public void incPlayerThrowCount(int team) {
 		player[team].throwCount++;
+		System.out.println("incPlayerThrowCount throwCount: " + player[team].throwCount);
 	}
 //decrease player throwCount
 	public void decPlayerCount(int team) {
@@ -397,6 +398,7 @@ public class GameData {
 	}
 	
 	public int getSelectedPos() {
+		System.out.println("GameData inside selected number: " + selected);
 		return selected;
 	}
 	

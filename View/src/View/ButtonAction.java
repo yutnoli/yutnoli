@@ -91,10 +91,7 @@ public class ButtonAction implements ActionListener{
 		
 		else if(e.getSource().equals(throwYutSelect)) {
 			System.out.println("throwYutSelect 버튼이 눌렸습니다!!");
-			getPos.setPositionFrame();
-			controler.recieveThrowAction(data.getSelectedPos());////////////Selected position is already saved in data. So this function does not need parameter. So changed it later. 
-			mapPrint.yutImageChange();
-			data.resetChangedData();
+			getPos.setPositionFrame(controler, mapPrint);
 		}
 		find = false;
 	}

@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import View.ButtonAction;
 import Model.GameData;
+import Control.ControlMain;
 
 public class MapPrint extends JFrame {
 	GameData data = GameData.getInstance();
@@ -33,7 +34,7 @@ public class MapPrint extends JFrame {
 	ImageIcon[] team3StateIcon = new ImageIcon[4];
 	ImageIcon[] team4StateIcon = new ImageIcon[4];
 	ImageIcon stateEmpty;
-
+	
 	public void initMapPrint(int numOfPlayers, int numOfStones) {
 		data.initGameData(numOfPlayers, numOfStones);
 	}
@@ -465,11 +466,16 @@ class SelectPosition implements ActionListener{
 	JButton[] getPositionButton;
 	JFrame selectFrame;
 	int selected;
+	GameData data = GameData.getInstance();
+	ControlMain controler;
+	MapPrint mapPrint;
 	
-	void initSelcetAction(JButton[] getPositionButton, JFrame selectFrame, int selected) {
+	void initSelcetAction(JButton[] getPositionButton, JFrame selectFrame, int selected, ControlMain controler, MapPrint mapPrint) {
 		this.getPositionButton =  getPositionButton;
 		this.selectFrame = selectFrame;
 		this.selected = selected;
+		this.controler = controler;
+		this.mapPrint = mapPrint;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -493,9 +499,12 @@ class SelectPosition implements ActionListener{
 			selected = 4;
 			System.out.println("selected number: 4");
 		}
-		selectFrame.dispose();
-		GameData data = GameData.getInstance();
 		data.setSelcetedPos(selected);
+		controler.recieveThrowAction(selected);////////////Selected position is already saved in data. So this function does not need parameter. So changed it later. 
+		System.out.println("ButtonAction inside before yutImageChange");
+		mapPrint.yutImageChange();
+		data.resetChangedData();
+		selectFrame.dispose();
 	}
 }
 
@@ -503,9 +512,9 @@ class GetPosition extends JFrame{
 	JButton[] getSelectButton = new JButton[5];
 	int selected;
 	
-	void setPositionFrame() {
+	void setPositionFrame(ControlMain controler, MapPrint mapPrint) {
 		this.setTitle("Select Yut Position");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//If user close the frame before select yut position, then program stop.
 		Container gamePanel = getContentPane();
 		gamePanel.setLayout(null);
 		
@@ -516,11 +525,11 @@ class GetPosition extends JFrame{
 		getSelectButton[4] = new JButton("Mo");
 		
 		SelectPosition position = new SelectPosition();
-		position.initSelcetAction(getSelectButton, this, selected);
+		position.initSelcetAction(getSelectButton, this, selected, controler, mapPrint);
 		
 		for(int i = 0; i < 5; i++) {
 			getSelectButton[i].addActionListener(position);
-			getSelectButton[i].setBounds(16 + 116*i, 100, 100, 50);
+			getSelectButton[i].setBounds(14 + 114*i, 100, 100, 50);
 			gamePanel.add(getSelectButton[i]);
 		}
 		gamePanel.setBackground(Color.white);
