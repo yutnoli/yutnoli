@@ -245,7 +245,7 @@ public class GameData {
 			return false;
 	}
 //set valid Place with Real State shape mode
-	public void setValidPlace(int state, int num) {
+	public void setValidPlaceRS(int state, int num) {
 		if(state == 0) {
 			if(num >=0 && num<4) {
 				validPlace[num] = true;
@@ -277,5 +277,9 @@ public class GameData {
 		else if(state == 2) {
 			validPlace[28] = true;
 		}
+	}
+//set valid Place with Virtual State shape mode
+	public void setValidPlaceVS(int num) {
+		validPlace[num] = true;
 	}
 }

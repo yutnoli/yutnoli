@@ -216,66 +216,7 @@ public class GameData {
 			else if (num > 7 && num <12) {
 				return validPlace[num + 2];
 			}
-			else if (num > 11 && num < 18) {
-				return validPlace[num + 3];
-			}
-			else if (num > 17 && num < 24) {
-				return validPlace[num + 4];
-			}
-			else
-				return false;
-		}
-		else if(state == 1) {
-			if(num == 0)
-				return validPlace[4];
-			else if(num == 1) 
-				return validPlace[9];
-			else if (num == 2)
-				return validPlace[14];
-			else if (num == 3) {
-				return validPlace[21];
-			}
-			else
-				return false;
-		}
-		else if(state == 2) {
-			return validPlace[28];
-		}
-		else
-			return false;
-	}
-//set valid Place with Real State shape mode
-	public void setValidPlace(int state, int num) {
-		if(state == 0) {
-			if(num >=0 && num<4) {
-				validPlace[num] = true;
-			}
-			else if(num>3 && num<8) {
-				validPlace[num + 1] = true;
-			}
-			else if (num > 7 && num <12) {
-				validPlace[num + 2] = true;
-			}
-			else if (num > 11 && num < 18) {
-				validPlace[num + 3] = true;
-			}
-			else if (num > 17 && num < 24) {
-				validPlace[num + 4] = true;
-			}
-		}
-		else if(state == 1) {
-			if(num == 0)
-				validPlace[4] = true;
-			else if(num == 1) 
-				validPlace[9] = true;
-			else if (num == 2)
-				validPlace[14] = true;
-			else if (num == 3) {
-				validPlace[21] = true;
-			}
-		}
-		else if(state == 2) {
-			validPlace[28] = true;
+			else if (num >)
 		}
 	}
 }

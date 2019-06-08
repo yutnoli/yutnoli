@@ -244,7 +244,7 @@ public class GameData {
 		else
 			return false;
 	}
-//set valid Place with Real State shape mode
+//set valid Place
 	public void setValidPlace(int state, int num) {
 		if(state == 0) {
 			if(num >=0 && num<4) {
