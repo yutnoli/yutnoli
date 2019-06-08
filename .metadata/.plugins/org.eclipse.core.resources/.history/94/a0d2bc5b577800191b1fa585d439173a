@@ -1,0 +1,88 @@
+package Model;
+
+class stateData{
+	int team;
+	int number;
+	
+	public stateData() {
+		this.team = 9;//9 means state empty
+		this.number = 0;
+	}
+}
+
+class playerData{
+	int team;
+	int number;
+	
+	public playerData() {
+		this.team = 9;
+		this.number = 0;
+	}
+}
+
+public class GameData {
+	private stateData[] normalState = new stateData[24];
+	private stateData[] cornerCenterState = new stateData[4];
+	private stateData startState = new stateData();
+	private int numberOfPlayers;
+	private int numberOfStones;
+	
+	public GameData() {
+		this.numberOfPlayers = 4;
+		this.numberOfStones = 3;
+	}
+	
+	public GameData(int numberOfPlayers, int numberOfStones) {
+		this.numberOfPlayers = numberOfPlayers;
+		this.numberOfStones = numberOfStones;
+	}
+	
+//get data	
+	public int getNsTeamData(int num) {
+		return normalState[num].team;
+	}
+	
+	public int getNsNumData(int num) {
+		return normalState[num].number;
+	}
+	
+	public int getCcsTeamData(int num) {
+		return cornerCenterState[num].team;
+	}
+	
+	public int getCcsNumData(int num) {
+		return cornerCenterState[num].number;
+	}
+	
+	public int getSsTeamData() {
+		return startState.team;
+	}
+
+	public int getSsNumData() {
+		return startState.number;
+	}
+//set data
+	public void setNsTeamData(int num, int val) {
+		normalState[num].team = val;
+	}
+	
+	public void setNsNumData(int num, int val) {
+		normalState[num].number = val;
+	}
+	
+	public void setCcsTeamData(int num, int val) {
+		cornerCenterState[num].team = val;
+	}
+	
+	public void setCcsNumData(int num, int val) {
+		cornerCenterState[num].number = val;
+	}
+
+	public void setSsTeamData(int val) {
+		startState.team = val;
+	}
+	
+	public void setSsNumData(int val) {
+		startState.number = val;
+	}
+}
