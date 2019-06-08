@@ -1,0 +1,69 @@
+package Control;
+
+import Model.GameData;
+import Control.ThrowingYut;
+
+public class ControlMain {
+	GameData data = GameData.getInstance();
+	ThrowingYut throwYut = new ThrowingYut();
+	ValidPlace validPlaceControl = new ValidPlace();
+	boolean clicked = false;
+	
+//if other button added overload right below function	
+	public void recieveStateAction(int state, int num) {//receive state button action
+		int numCount = 0;//# of stones in selected state
+		int[] choseState = new int[2];
+		int turn = data.getTurn();
+		choseState[0] = data.getChoseStateST();
+		choseState[1] = data.getChoseStateNU();
+		if(buttonFlowState) {
+			if(!clicked) {//first click
+				if (state >= 0 && state < 3) {//normal state
+					if(data.getTeamData(state, num) == turn) {
+						data.setChoseState(state, num);
+						clicked = true;
+					}
+				}
+				else if(state == 3) {//newStone state //num means team
+					if(num == turn) {
+						if(data.getPlayerNum(num) != 0) {
+							data.setChoseState(3, num);
+							clicked = true;
+						}
+						else;//do nothing
+					}
+				}
+				else;//do nothing
+			}
+			else if(clicked) {//second click
+				if(validPlaceControl.checkValidPlace(state, num)) {//check clicked state is valid to move
+					if(state >= 0 && state < 3) {
+						if(data.getTeamData(state, num) == turn) {
+							numCount = data.getNumData(state, num);
+							numCount += data.getNumData(choseState[0], choseState[1]);
+							data.setStateData(state, num, turn, numCount);
+							data.setStateData(choseState[0], choseState[1], 9, 0);
+							clicked = false;
+						}
+					}
+					else if(state == 4) {
+						numCount = data.getFinishedStones(turn);
+						numCount += data.getNumData(choseState[0], choseState[1]);
+						data.setFinishedStones(turn, numCount);
+						data.setStateData(choseState[0], choseState[1], 9, 0);
+						clicked = false;
+					}
+				}
+			}
+		}
+	}
+	
+	public void recieveThrowAction(int throwOption) {//receive throw button action
+		//throwOption '0' means random, '1' means selected.
+		
+	}
+	
+	public void mainFlow() {
+		//In this function there should be included moveTurn function.
+	}
+}

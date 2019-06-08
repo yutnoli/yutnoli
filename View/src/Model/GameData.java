@@ -17,6 +17,7 @@ class playerData{
 	int team;
 	int number;
 	int throwCount;
+	int finish;
 	ArrayList<Integer> moves = new ArrayList<Integer>();
 	/*
 	 * 0 = do
@@ -29,6 +30,7 @@ class playerData{
 		this.team = 9;
 		this.number = 0;
 		this.throwCount = 1;
+		this.finish = 0;
 	}
 	
 	public boolean findMove(int move) {
@@ -70,14 +72,29 @@ public class GameData {
 		for(int i = 0; i < 4; i++) {
 			this.yut[i] = 0;
 		}
-		player = new playerData[this.numberOfPlayers];//maybe this occurs error.(Check and changed it into dynamic allocation.)
+		player = new playerData[4];//maybe this occurs error.(Check and changed it into dynamic allocation.)
 		for (int i = 0; i < this.numberOfPlayers; i++) {
 			player[i].team = i;
 			player[i].number = this.numberOfStones;
-			player[i].throwCount = 1;
 		}
 	}
 	
+//get # of players
+	public int getNumOfPlayers() {
+		return numberOfPlayers;
+	}
+//set # of players
+	public void setNumOfPlayers(int num) {
+		numberOfPlayers = num;
+	}
+//get # of players
+	public int getNumOfStones() {
+		return numberOfStones;
+	}
+//set # of players
+	public void setNumOfStones(int num) {
+		numberOfStones = num;
+	}
 //get state data	
 	public int getTeamData(int state, int num) {
 		if(state == 0)
@@ -117,11 +134,11 @@ public class GameData {
 		else;//do nothing
 	}
 //get player data	
-	public int getPlayerData(int team) {
+	public int getPlayerNum(int team) {
 		return player[team].number;
 	}
 //set player data
-	public void setPlayerData(int team, int val) {
+	public void setPlayerNum(int team, int val) {
 		player[team].number = val;
 	}
 //get player throwCount
@@ -139,6 +156,14 @@ public class GameData {
 //decrease player throwCount
 	public void decPlayerCount(int team) {
 		player[team].throwCount--;
+	}
+//get # of player's finished stone
+	public int getFinishedStones(int team) {
+		return player[team].finish;
+	}
+//set # of player's finished stone
+	public void setFinishedStones(int team, int num) {
+		player[team].finish = num;
 	}
 //find player move
 	public boolean findPlayerMove(int team, int move) {
@@ -160,6 +185,10 @@ public class GameData {
 		}
 		return false;
 	}
+//check player has no move
+	public boolean checkMoveEmpty(int team) {
+		return player[team].moves.isEmpty();
+	}
 //get yut position	
 	public int[] getYutPosition() {
 		return yut;
@@ -179,8 +208,12 @@ public class GameData {
 		turn = (turn+1)%numberOfPlayers;
 	}
 //get chose state
-	public int[] getChoseState() {
-		return stateChose;//this return reference so you have to fix it later
+	public int getChoseStateST() {
+		return stateChose[0];
+	}
+	
+	public int getChoseStateNU() {
+		return stateChose[1];
 	}
 //set chose state
 	public void setChoseState(int state, int num) {

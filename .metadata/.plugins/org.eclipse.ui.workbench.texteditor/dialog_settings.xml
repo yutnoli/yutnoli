@@ -2,16 +2,18 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="number" key="selection"/>
+		<item value="data.getTurn()" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="data.getTurn()"/>
 			<item value="number"/>
 			<item value="num"/>
 		</list>
 		<list key="replacehistory">
+			<item value="turn"/>
 			<item value="choseState[1]"/>
 			<item value=""/>
 		</list>

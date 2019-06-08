@@ -8,7 +8,8 @@ public class ValidPlace {
 	boolean[] playerMove = new boolean[5];
 	
 	void setValidPlaceMap(int state, int num) {
-		choseState = data.getChoseState();
+		choseState[0] = data.getChoseStateST();
+		choseState[1] = data.getChoseStateNU();
 		for(int i = 0;i < 5; i++) {
 			playerMove[i] = false;
 		}
