@@ -15,7 +15,6 @@ public class ControlMain {
 //if other button added overload right below function	
 	public void recieveAction(int state, int num) {//receive state button action
 		int teamCheck = 9;
-		int numCount = 0;//# of stones in selected state
 		if(buttonFlowState) {
 			if(!clicked) {//first click
 				if (state == 0) {//normal state
@@ -51,10 +50,7 @@ public class ControlMain {
 				if(validPlaceControl.checkValidPlace(state, num)) {//check clicked state is valid to move
 					if(state == 0) {
 						teamCheck = data.getNsTeamData(num);
-						if(teamCheck == data.getTurn()) {
-							numCount = data.getNsNumData(num);
-							n
-						}
+						//TODO
 					}
 					else if(state == 1) {
 						

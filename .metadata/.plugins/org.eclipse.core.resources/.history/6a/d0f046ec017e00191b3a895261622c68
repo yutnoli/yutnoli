@@ -90,31 +90,42 @@ public class GameData {
 			return 9;
 	}
 	
-	public int getNumData(int state, int num) {
-		if(state == 0)
-			return normalState[num].number;
-		else if(state == 1)
-			return cornerCenterState[num].number;
-		else if(state == 2)
-			return startState.number;
-		else
-			return 9;
+	public int getNsNumData(int num) {
+		return normalState[num].number;
+	}
+	
+
+	
+	public int getCcsNumData(int num) {
+		return cornerCenterState[num].number;
+	}
+
+	public int getSsNumData() {
+		return startState.number;
 	}
 //set state data
-	public void setStateData(int state, int num, int team, int numToChange) {
-		if(state == 0) {
-			normalState[num].team = team;
-			normalState[num].number = numToChange;
-		}
-		else if(state == 1) {
-			cornerCenterState[num].team = team;
-			cornerCenterState[num].number = numToChange;
-		}
-		else if(state == 2) {
-			startState.team = team;
-			startState.number = numToChange;
-		}
-		else;//do nothing
+	public void setNsTeamData(int num, int val) {
+		normalState[num].team = val;
+	}
+	
+	public void setNsNumData(int num, int val) {
+		normalState[num].number = val;
+	}
+	
+	public void setCcsTeamData(int num, int val) {
+		cornerCenterState[num].team = val;
+	}
+	
+	public void setCcsNumData(int num, int val) {
+		cornerCenterState[num].number = val;
+	}
+
+	public void setSsTeamData(int val) {
+		startState.team = val;
+	}
+	
+	public void setSsNumData(int val) {
+		startState.number = val;
 	}
 //get player data	
 	public int getPlayerData(int team) {
