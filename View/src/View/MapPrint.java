@@ -24,16 +24,16 @@ public class MapPrint extends JFrame {
 	JButton throwYutselect;
 	JButton showTurn;
 	ButtonAction mapClicked;
-	ImageIcon[] teamIcon = new ImageIcon[20];
+	ImageIcon[] teamIcon = new ImageIcon[24];
 	JButton[] yutPosition = new JButton[4];
 	ImageIcon[] yutIcon = new ImageIcon[3];
 	ImageIcon resizedIconNOrg;
 	ImageIcon resizedIconCOrg;
 	ImageIcon resizedIconSOrg;
-	ImageIcon[] team1StateIcon = new ImageIcon[4];
-	ImageIcon[] team2StateIcon = new ImageIcon[4];
-	ImageIcon[] team3StateIcon = new ImageIcon[4];
-	ImageIcon[] team4StateIcon = new ImageIcon[4];
+	ImageIcon[] team1StateIcon = new ImageIcon[5];
+	ImageIcon[] team2StateIcon = new ImageIcon[5];
+	ImageIcon[] team3StateIcon = new ImageIcon[5];
+	ImageIcon[] team4StateIcon = new ImageIcon[5];
 	ImageIcon stateEmpty;
 	ImageIcon[] turn = new ImageIcon[4];
 	
@@ -61,11 +61,11 @@ public class MapPrint extends JFrame {
 		resizedIconSOrg = new ImageIcon(resizedImage);
 		//team Image
 		for(int i = 0; i < 4; i++) {
-			for(int j = 0; j < 5; j++) {
+			for(int j = 0; j < 6; j++) {
 				icon = new ImageIcon("./team" + (i+1) + "_" + j + ".png");
 				img = icon.getImage();
 				resizedImage = img.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
-				teamIcon[5*i + j] = new ImageIcon(resizedImage);
+				teamIcon[6*i + j] = new ImageIcon(resizedImage);
 			}
 		}
 		//yut image
@@ -95,33 +95,33 @@ public class MapPrint extends JFrame {
 		img = icon.getImage();
 		resizedImage = img.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
 		ImageIcon endStateIcon = new ImageIcon(resizedImage);
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 5; i++) {
 			icon = new ImageIcon("./team1_on_state_"+(i+1)+".png");
 			img = icon.getImage();
-			resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
+			resizedImage = img.getScaledInstance(10, 54, Image.SCALE_SMOOTH);
 			team1StateIcon[i] = new ImageIcon(resizedImage);
 		}
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 5; i++) {
 			icon = new ImageIcon("./team2_on_state_"+(i+1)+".png");
 			img = icon.getImage();
-			resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
+			resizedImage = img.getScaledInstance(10, 54, Image.SCALE_SMOOTH);
 			team2StateIcon[i] = new ImageIcon(resizedImage);
 		}
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 5; i++) {
 			icon = new ImageIcon("./team3_on_state_"+(i+1)+".png");
 			img = icon.getImage();
-			resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
+			resizedImage = img.getScaledInstance(10, 54, Image.SCALE_SMOOTH);
 			team3StateIcon[i] = new ImageIcon(resizedImage);
 		}
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 5; i++) {
 			icon = new ImageIcon("./team4_on_state_"+(i+1)+".png");
 			img = icon.getImage();
-			resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
+			resizedImage = img.getScaledInstance(10, 54, Image.SCALE_SMOOTH);
 			team4StateIcon[i] = new ImageIcon(resizedImage);
 		}
 		icon = new ImageIcon("./state_empty.png");
 		img = icon.getImage();
-		resizedImage = img.getScaledInstance(10, 43, Image.SCALE_SMOOTH);
+		resizedImage = img.getScaledInstance(10, 54, Image.SCALE_SMOOTH);
 		stateEmpty = new ImageIcon(resizedImage);
 		for(int i = 0; i < 4; i++) {
 			icon = new ImageIcon("./team" + (i + 1) + ".png");
@@ -155,7 +155,7 @@ public class MapPrint extends JFrame {
 		startState.setFocusPainted(false);
 		/////////////////////TODO complete temporary button
 		for(int i = 0; i < 4; i++) {
-			playerInfo[i] = new JButton(teamIcon[5*i + 4]);
+			playerInfo[i] = new JButton(teamIcon[6*i + 5]);
 			playerInfo[i].setBorderPainted(false);
 			playerInfo[i].setContentAreaFilled(false);
 			playerInfo[i].setFocusPainted(false);
@@ -258,22 +258,22 @@ public class MapPrint extends JFrame {
 		}
 		
 		for(int i = 0; i < 4; i++) {
-			normalStateStone[i].setBounds(805, 632 - i*100, 10, 43);
-			normalStateStone[i+4].setBounds(680 - i*100, 207, 10, 43);
-			normalStateStone[i+8].setBounds(255, 332 + i*100, 10, 43);
-			normalStateStone[i+12].setBounds(380 + i*100, 757, 10, 43);
+			normalStateStone[i].setBounds(805, 625 - i*100, 10, 54);
+			normalStateStone[i+4].setBounds(680 - i*100, 200, 10, 54);
+			normalStateStone[i+8].setBounds(255, 325 + i*100, 10, 54);
+			normalStateStone[i+12].setBounds(380 + i*100, 750, 10, 54);
 		}
 		for(int i = 0; i < 2; i++) {
-			normalStateStone[i+16].setBounds(695 - i*85, 317 + i*85, 10, 43);
-			normalStateStone[19-i].setBounds(365 + i*85, 647 - i*85, 10, 43);
-			normalStateStone[i+20].setBounds(365 + i*85, 317 + i*85, 10, 43);
-			normalStateStone[i+22].setBounds(610 + i*85, 562 + i*85, 10, 43);
+			normalStateStone[i+16].setBounds(695 - i*85, 310 + i*85, 10, 54);
+			normalStateStone[19-i].setBounds(365 + i*85, 640 - i*85, 10, 54);
+			normalStateStone[i+20].setBounds(365 + i*85, 310 + i*85, 10, 54);
+			normalStateStone[i+22].setBounds(604 + i*85, 555 + i*85, 10, 54);
 		}
-		cornerCenterStateStone[0].setBounds(826, 207, 10, 43);
-		cornerCenterStateStone[1].setBounds(276, 207, 10, 43);
-		cornerCenterStateStone[2].setBounds(276, 757, 10, 43);
-		cornerCenterStateStone[3].setBounds(551, 482, 10, 43);
-		startStateStone.setBounds(826, 757, 10, 43);
+		cornerCenterStateStone[0].setBounds(826, 200, 10, 54);
+		cornerCenterStateStone[1].setBounds(276, 200, 10, 54);
+		cornerCenterStateStone[2].setBounds(276, 750, 10, 54);
+		cornerCenterStateStone[3].setBounds(551, 475, 10, 54);
+		startStateStone.setBounds(826, 750, 10, 54);
 		
 		showTurn.setBounds(200, 50, 70, 70);
 		
@@ -308,7 +308,7 @@ public class MapPrint extends JFrame {
 		
 		this.setSize(1000, 1000);
 		this.setLocationRelativeTo(null);
-		
+		this.setVisible(true);
 		initMap();
 	}
 	
@@ -501,7 +501,7 @@ public class MapPrint extends JFrame {
 		
 		for (int i = 0; i < 4; i++) {
 			if(teamDataChanged[i]) {
-				playerInfo[i].setIcon(teamIcon[data.getPlayerNum(i) + 5*i]);
+				playerInfo[i].setIcon(teamIcon[data.getPlayerNum(i) + 6*i]);
 			}
 		}
 	}
@@ -512,7 +512,7 @@ public class MapPrint extends JFrame {
 	
 	public void initMap() {
 		int playerNum = 4;
-		int stoneNum = 4;
+		int stoneNum = 5;
 		
 		for(int i = 0; i < 4; i++) {
 			yutPosition[i].setIcon(yutIcon[0]);
@@ -534,12 +534,10 @@ public class MapPrint extends JFrame {
 		}
 		
 		for(int i = 0; i < playerNum; i++) {
-			playerInfo[i].setIcon(teamIcon[5*i + stoneNum]);
+			playerInfo[i].setIcon(teamIcon[6*i + stoneNum]);
 		}
 		
 		showTurn.setIcon(turn[0]);
-		this.dispose();
-		this.setVisible(true);
 	}
 }
 
@@ -590,6 +588,7 @@ class SelectPosition implements ActionListener{
 		controler.recieveThrowAction(selected);////////////Selected position is already saved in data. So this function does not need parameter. So changed it later. 
 		System.out.println("ButtonAction inside before yutImageChange");
 		mapPrint.yutImageChange();
+		mapPrint.turnChanged();
 		data.resetChangedData();
 		selectFrame.dispose();
 	}
@@ -618,7 +617,7 @@ class GetPosition extends JFrame{
 		
 		for(int i = 0; i < 6; i++) {
 			getSelectButton[i].addActionListener(position);
-			getSelectButton[i].setBounds(4 + 94*i, 90, 90, 50);
+			getSelectButton[i].setBounds(7 + 96*i, 90, 90, 50);
 			gamePanel.add(getSelectButton[i]);
 		}
 		gamePanel.setBackground(Color.white);

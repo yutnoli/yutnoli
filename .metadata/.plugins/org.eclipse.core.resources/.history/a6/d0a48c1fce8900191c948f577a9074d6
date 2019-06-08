@@ -1,0 +1,74 @@
+package View;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import Control.ControlMain;
+import Control.DeleteMove;
+import Model.GameData;
+
+class SelectOption implements ActionListener{
+	JButton[] getPositionButton;
+	JFrame selectFrame;
+	GameData data = GameData.getInstance();
+	ControlMain controler;
+	MapPrint mainMap;
+	DeleteMove delete = new DeleteMove();
+	GetInitData initGame = GetInitData.getInstance();
+	
+	
+	void initSelcetOption(JButton[] getPositionButton, JFrame selectFrame, ControlMain controler, MapPrint mainMap) {
+		this.getPositionButton =  getPositionButton;
+		this.selectFrame = selectFrame;
+		this.controler = controler;
+		this.mainMap = mainMap;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(getPositionButton[0])) {
+			selectFrame.dispose();
+			initGame.getDataStart(1, mainMap);
+			System.out.println("selected number: 0");
+		}
+		else if(e.getSource().equals(getPositionButton[1])) {
+			//End Game
+			System.exit(0);
+			System.out.println("selected number: 1");
+		}
+}
+
+public class GameEndFrame extends JFrame{
+	JButton[] getSelectButton = new JButton[2];
+	SelectMove position = new SelectMove();
+	int selected;
+	
+	void initPositionFrame(ControlMain controler, MapPrint mainMap) {
+		this.setTitle("WINNER!!");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//If user close the frame before select yut position, then program stop.
+		Container gamePanel = getContentPane();
+		gamePanel.setLayout(null);
+		
+		getSelectButton[0] = new JButton("Restart");
+		getSelectButton[1] = new JButton("GameEnd");
+		
+		position.initSelcetMove(getSelectButton, this, selected, controler, mainMap);
+		
+		for(int i = 0; i < 5; i++) {
+			getSelectButton[i].addActionListener(position);
+			getSelectButton[i].setBounds(14 + 114*i, 100, 100, 50);
+			gamePanel.add(getSelectButton[i]);
+		}
+		gamePanel.setBackground(Color.white);
+		this.setSize(600, 300);
+		this.setLocationRelativeTo(null);
+	}
+	
+	void showPositionFrame() {
+		this.setVisible(true);
+	}	
+}

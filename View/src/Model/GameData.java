@@ -61,6 +61,7 @@ public class GameData {
 	private boolean[] stateChanged = new boolean[29];
 	private boolean[] teamDataChanged = new boolean[4];
 	private int endCheck;
+	private boolean finishable;
 	
 	public static GameData getInstance() {//this function returns instance, which already exists
 		if(gameData == null) {
@@ -92,6 +93,7 @@ public class GameData {
 		}
 		startState = new StateData();
 		endCheck = 9;//9 means not finished
+		finishable = false;
 	}
 	
 //get # of players
@@ -221,12 +223,19 @@ public class GameData {
 		System.out.println("checkMoveEmpty inside!!!!!!!!!!!1");
 		if(player[team].moves.isEmpty())
 			return true;
-		else
+		else {
+			System.out.println("checkMoveEmpty inside!!!!!!!!!!!2");
+			for(int i = 0; i < 5; i++) {
+				if(player[team].findMove(i))
+					return false;
+			}
+			System.out.println("checkMoveEmpty inside!!!!!!!!!!!3");
 			if(player[team].finish + player[team].number == numberOfStones) {
-				System.out.println("checkMoveEmpty inside!!!!!!!!!!!2");
+				System.out.println("checkMoveEmpty inside!!!!!!!!!!!4");
 				player[team].moves.clear();
 				return true;
 			}
+		}
 		return false;
 			
 	}
@@ -429,6 +438,14 @@ public class GameData {
 	
 	public void setEndCheck(int check) {
 		endCheck = check;
+	}
+	
+	public boolean getFinishable() {
+		return finishable;
+	}
+	
+	public void setFinishable(boolean par) {
+		finishable = par;
 	}
 }
 

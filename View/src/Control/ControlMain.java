@@ -45,7 +45,6 @@ public class ControlMain {
 			}
 			else if(clicked) {//second click
 				if(choseState[0] == state && choseState[1] == num) {
-					clicked = false;
 				}
 				else {
 					if(validPlaceControl.checkValidPlace(state, num)) {//check clicked state is valid to move
@@ -170,26 +169,42 @@ public class ControlMain {
 							}
 						}
 						else if(state == 4) {
-							numCount = data.getFinishedStones(turn);
-							numCount += data.getNumData(choseState[0], choseState[1]);
-							data.setFinishedStones(turn, numCount);
-							data.setStateData(choseState[0], choseState[1], 9, 0);
-							data.setStateChanged(choseState[0], choseState[1]);
-							delete.deletUsedMove(state, num);
-							clicked = false;
+							data.setFinishable(true);
 						}
 					}
 					else {
 						if(data.getTeamData(state, num) == data.getTurn()) {
 							data.setChoseState(state, num);
 						}
-						else {
-							clicked = false;
-						}
 					}
 				}
 			}
 		}
+	}
+	
+	public void finishStone() {
+		int numCount = 0;
+		int[] choseState = new int[2];
+		int endCheck = 9;
+		choseState[0] = data.getChoseStateST();
+		choseState[1] = data.getChoseStateNU();
+		numCount = data.getFinishedStones(turn);
+		numCount += data.getNumData(choseState[0], choseState[1]);
+		data.setFinishedStones(turn, numCount);
+		data.setStateData(choseState[0], choseState[1], 9, 0);
+		data.setStateChanged(choseState[0], choseState[1]);
+		data.setFinishable(false);
+		
+		endCheck = checkGameEnd();
+		if(endCheck != 9) {
+			data.setEndCheck(endCheck);
+		}
+		
+		if(data.getPlayerThrowCount(turn) == 0 && data.checkMoveEmpty(turn)) {
+			data.incPlayerThrowCount(data.getTurn());
+			data.moveTurn();
+		}
+		clicked = false;
 	}
 	
 	void _throwYut() {//receive throw button action
@@ -203,8 +218,9 @@ public class ControlMain {
 	
 	int checkGameEnd() {//If return is 9 then game is not ended, another number is the number of winner team.
 		int numOfPlayers = data.getNumOfPlayers();
+		int numOfStones = data.getNumOfStones();
 		for(int i = 0; i < numOfPlayers; i++ ) {
-			if(data.getPlayerNum(i) == 0)
+			if(data.getPlayerNum(i) == 0 && data.getFinishedStones(i) == numOfStones)
 				return i;
 		}
 		return 9;
@@ -230,7 +246,6 @@ public class ControlMain {
 	}
 	
 	void mainFlow(int recieveAction) {//recieveAction '0' means throw action, '1' means state action.
-		int endCheck = 9;
 		turn = data.getTurn();
 		if(recieveAction == 0) {
 			if(data.getPlayerThrowCount(turn)>0) {
@@ -243,10 +258,6 @@ public class ControlMain {
 		else if(recieveAction == 1) {
 			System.out.println("function mainFlow");
 			stateAction();
-			endCheck = checkGameEnd();
-			if(endCheck != 9) {
-				data.setEndCheck(endCheck);
-			}
 			if(data.getPlayerThrowCount(turn) == 0 && data.checkMoveEmpty(turn)) {
 				data.incPlayerThrowCount(data.getTurn());
 				data.moveTurn();

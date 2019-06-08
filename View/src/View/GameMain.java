@@ -7,6 +7,7 @@ public class GameMain{
 	
 	public static void main(String[] args) {
 		GetInitData initGame = new GetInitData();
-		initGame.getDataStart(0);
+		MapPrint mainMap = new MapPrint();
+		initGame.getDataStart(0, mainMap);
 	}
 }
