@@ -1,0 +1,18 @@
+package Control;
+
+import Model.GameData;
+
+public class ThrowingYut {
+	GameData data = GameData.getInstance();
+	
+	public boolean checkThrowCount(int team) {
+		if(0 != data.getPlayerThrowCount(team)) {
+			return  true;
+		}
+		return false;
+	}
+	
+	public void throwRandom(int team) {
+		
+	}
+}
