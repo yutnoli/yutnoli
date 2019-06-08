@@ -3,17 +3,17 @@ package Model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-class stateData{
+class StateData{
 	int team;
 	int number;
 	
-	public stateData() {
+	public StateData() {
 		this.team = 9;//9 means state empty
 		this.number = 0;
 	}
 }
 
-class playerData{
+class PlayerData{
 	int team;
 	int number;
 	int throwCount;
@@ -26,7 +26,7 @@ class playerData{
 	 * 3 = yut
 	 * 4 = mo
 	 */
-	public playerData() {
+	public PlayerData() {
 		this.team = 9;
 		this.number = 0;
 		this.throwCount = 1;
@@ -47,16 +47,18 @@ class playerData{
 
 public class GameData {
 	private static GameData gameData;//this variable if for Singleton Pattern
-	private stateData[] normalState = new stateData[24];
-	private stateData[] cornerCenterState = new stateData[4];
-	private stateData startState = new stateData();
+	private StateData[] normalState = new StateData[24];
+	private StateData[] cornerCenterState = new StateData[4];
+	private StateData startState = new StateData();
 	private int numberOfPlayers;
 	private int numberOfStones;
-	private playerData[] player; 
+	private PlayerData[] player; 
 	private int[] yut = new int[4];//0 means round part, 1 means flat part
 	private int turn;
 	private int[] stateChose = new int[2];
 	private boolean[] validPlace = new boolean[30];
+	private boolean[] stateChanged = new boolean[29];
+	private boolean[] teamDataChanged = new boolean[4];
 	
 	public static GameData getInstance() {//this function returns instance, which already exists
 		if(gameData == null) {
@@ -72,7 +74,7 @@ public class GameData {
 		for(int i = 0; i < 4; i++) {
 			this.yut[i] = 0;
 		}
-		player = new playerData[4];//maybe this occurs error.(Check and changed it into dynamic allocation.)
+		player = new PlayerData[4];
 		for (int i = 0; i < this.numberOfPlayers; i++) {
 			player[i].team = i;
 			player[i].number = this.numberOfStones;
@@ -305,6 +307,65 @@ public class GameData {
 		}
 		else if(state == 4) {
 			validPlace[29] = true;
+		}
+	}
+	
+	public void resetChangedData() {
+		for(int i = 0; i < 29; i++) {
+			stateChanged[i] = false;
+		}
+		for(int i = 0; i < 4; i++) {
+			teamDataChanged[i] = false;
+		}
+	}
+	
+	public boolean[] getStateChanged() {
+		return stateChanged;
+	}
+	
+	public boolean[] getTeamDataChanged() {
+		return teamDataChanged;
+	}
+	
+	public void setStateChanged(int state, int num) {
+		if(state == 0) {
+			if(num >=0 && num<4) {
+				stateChanged[num] = true;
+			}
+			else if(num>3 && num<8) {
+				stateChanged[num + 1] = true;
+			}
+			else if (num > 7 && num <12) {
+				stateChanged[num + 2] = true;
+			}
+			else if (num > 11 && num < 18) {
+				stateChanged[num + 3] = true;
+			}
+			else if (num > 17 && num < 24) {
+				stateChanged[num + 4] = true;
+			}
+		}
+		else if(state == 1) {
+			if(num == 0)
+				stateChanged[4] = true;
+			else if(num == 1) 
+				stateChanged[9] = true;
+			else if (num == 2)
+				stateChanged[14] = true;
+			else if (num == 3) {
+				stateChanged[21] = true;
+			}
+		}
+		else if(state == 2) {
+			stateChanged[28] = true;
+		}
+	}
+	
+	public void setTeamDataChanged(int num) {
+		for(int i = 0; i < 4; i++) {
+			if(i == num) {
+				teamDataChanged[i] =  true;
+			}
 		}
 	}
 }

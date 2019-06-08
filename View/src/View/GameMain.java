@@ -91,23 +91,24 @@ class StoneAction implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(getStoneButton[0])) {
 				numOfStone = 1;
-				System.out.println("player number: 1");
+				System.out.println("stone number: 1");
 		}
 		else if(e.getSource().equals(getStoneButton[1])) {
 			numOfStone = 2;
-			System.out.println("player number: 2");
+			System.out.println("stone number: 2");
 		}
 		else if(e.getSource().equals(getStoneButton[2])) {
 			numOfStone = 3;
-			System.out.println("player number: 3");
+			System.out.println("stone number: 3");
 		}
 		else if(e.getSource().equals(getStoneButton[3])) {
 			numOfStone = 4;
-			System.out.println("player number: 4");
+			System.out.println("stone number: 4");
 		}
 		initFrame.dispose();
 		MapPrint mainMap = new MapPrint();
-		mainMap.testImage();
+		mainMap.initMapPrint(numOfPlayer, numOfStone);
+		mainMap.initImage();
 	}
 }
 

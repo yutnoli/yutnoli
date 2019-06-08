@@ -46,8 +46,110 @@ public class ControlMain {
 							numCount = data.getNumData(state, num);
 							numCount += data.getNumData(choseState[0], choseState[1]);
 							data.setStateData(state, num, turn, numCount);
-							data.setStateData(choseState[0], choseState[1], 9, 0);
-							clicked = false;
+							if(choseState[0] == 3) {
+								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
+								data.setTeamDataChanged(choseState[1]);
+								data.setStateChanged(state, num);
+								clicked = false;
+							}
+							else {
+								data.setStateData(choseState[0], choseState[1], 9, 0);
+								clicked = false;
+								data.setStateChanged(choseState[0], choseState[1]);
+								data.setStateChanged(state, num);
+							}
+						}
+						else if(data.getTeamData(state, num) == 0) {
+							numCount = data.getNumData(state, num);
+							data.setPlayerNum(0, data.getPlayerNum(0) + numCount);
+							data.setTeamDataChanged(0);
+							data.setStateData(state, num, data.getTeamData(choseState[0], choseState[1]), data.getNumData(choseState[0], choseState[1]));
+							data.setStateChanged(state, num);
+							if(choseState[0] == 3) {
+								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
+								data.setTeamDataChanged(choseState[1]);
+								data.setStateChanged(state, num);
+								clicked = false;
+							}
+							else {
+								data.setStateData(choseState[0], choseState[1], 9, 0);
+								clicked = false;
+								data.setStateChanged(choseState[0], choseState[1]);
+								data.setStateChanged(state, num);
+							}
+						}
+						else if(data.getTeamData(state, num) == 1) {
+							numCount = data.getNumData(state, num);
+							data.setPlayerNum(1, data.getPlayerNum(1) + numCount);
+							data.setTeamDataChanged(1);
+							data.setStateData(state, num, data.getTeamData(choseState[0], choseState[1]), data.getNumData(choseState[0], choseState[1]));
+							data.setStateChanged(state, num);
+							if(choseState[0] == 3) {
+								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
+								data.setTeamDataChanged(choseState[1]);
+								data.setStateChanged(state, num);
+								clicked = false;
+							}
+							else {
+								data.setStateData(choseState[0], choseState[1], 9, 0);
+								clicked = false;
+								data.setStateChanged(choseState[0], choseState[1]);
+								data.setStateChanged(state, num);
+							}
+						}
+						else if(data.getTeamData(state, num) == 2) {
+							numCount = data.getNumData(state, num);
+							data.setPlayerNum(2, data.getPlayerNum(2) + numCount);
+							data.setTeamDataChanged(2);
+							data.setStateData(state, num, data.getTeamData(choseState[0], choseState[1]), data.getNumData(choseState[0], choseState[1]));
+							data.setStateChanged(state, num);
+							if(choseState[0] == 3) {
+								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
+								data.setTeamDataChanged(choseState[1]);
+								data.setStateChanged(state, num);
+								clicked = false;
+							}
+							else {
+								data.setStateData(choseState[0], choseState[1], 9, 0);
+								clicked = false;
+								data.setStateChanged(choseState[0], choseState[1]);
+								data.setStateChanged(state, num);
+							}
+						}
+						else if(data.getTeamData(state, num) == 3) {
+							numCount = data.getNumData(state, num);
+							data.setPlayerNum(3, data.getPlayerNum(3) + numCount);
+							data.setTeamDataChanged(3);
+							data.setStateData(state, num, data.getTeamData(choseState[0], choseState[1]), data.getNumData(choseState[0], choseState[1]));
+							data.setStateChanged(state, num);
+							if(choseState[0] == 3) {
+								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
+								data.setTeamDataChanged(choseState[1]);
+								data.setStateChanged(state, num);
+								clicked = false;
+							}
+							else {
+								data.setStateData(choseState[0], choseState[1], 9, 0);
+								clicked = false;
+								data.setStateChanged(choseState[0], choseState[1]);
+								data.setStateChanged(state, num);
+							}
+						}
+						else {
+							data.setStateData(state, num, data.getTeamData(choseState[0], choseState[1]), data.getNumData(choseState[0], choseState[1]));
+							data.setStateChanged(state, num);
+							if(choseState[0] == 3) {
+								data.setPlayerNum(choseState[1], data.getPlayerNum(choseState[1])-1);
+								data.setTeamDataChanged(choseState[1]);
+								data.setStateChanged(state, num);
+								clicked = false;
+							}
+							else {
+								data.setStateData(choseState[0], choseState[1], 9, 0);
+								clicked = false;
+								data.setStateChanged(choseState[0], choseState[1]);
+								data.setStateChanged(state, num);
+							}
 						}
 					}
 					else if(state == 4) {
@@ -55,6 +157,7 @@ public class ControlMain {
 						numCount += data.getNumData(choseState[0], choseState[1]);
 						data.setFinishedStones(turn, numCount);
 						data.setStateData(choseState[0], choseState[1], 9, 0);
+						data.setStateChanged(choseState[0], choseState[1]);
 						clicked = false;
 					}
 				}
