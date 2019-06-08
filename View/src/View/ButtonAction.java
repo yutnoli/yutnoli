@@ -22,6 +22,7 @@ public class ButtonAction implements ActionListener{
 	ControlMain controler = new ControlMain();
 	GameData data = GameData.getInstance();
 	GetPosition getPos = new GetPosition();
+	GetEndMove endMove = new GetEndMove();
 	
 	public ButtonAction(MapPrint mapPrint, JButton[] normalState, JButton[] cornerCenterState, JButton startState, JButton[] playerInfo, JButton endStone, JButton throwYutRandom, JButton throwYutSelect){
 		this.mapPrint = mapPrint;
@@ -33,6 +34,7 @@ public class ButtonAction implements ActionListener{
 		this.throwYutRandom = throwYutRandom;
 		this.throwYutSelect = throwYutSelect;
 		getPos.initPositionFrame(controler, mapPrint);
+		endMove.initPositionFrame(controler, mapPrint);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -83,9 +85,7 @@ public class ButtonAction implements ActionListener{
 		else if(e.getSource().equals(endStone)) {
 			System.out.println("endStone 버튼이 눌렸습니다!!");
 			controler.recieveStateAction(4, 0);
-			mapPrint.playerDataImageChange();
-			mapPrint.turnChanged();
-			data.resetChangedData();
+			endMove.showPositionFrame();
 		}
 		
 		else if(e.getSource().equals(throwYutRandom)) {
@@ -93,6 +93,7 @@ public class ButtonAction implements ActionListener{
 			controler.recieveThrowAction();
 			mapPrint.yutImageChange();
 			data.resetChangedData();
+			mapPrint.turnChanged();
 		}
 		
 		else if(e.getSource().equals(throwYutSelect)) {

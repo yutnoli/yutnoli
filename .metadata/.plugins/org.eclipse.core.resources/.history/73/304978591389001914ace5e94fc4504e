@@ -1,0 +1,107 @@
+package View;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import Control.ControlMain;
+import Control.DeleteMove;
+import Model.GameData;
+
+class SelectMove implements ActionListener{
+	JButton[] getPositionButton;
+	JFrame selectFrame;
+	int selected;
+	GameData data = GameData.getInstance();
+	ControlMain controler;
+	MapPrint mapPrint;
+	DeleteMove delete = new DeleteMove();
+	GetInitData initGame = new GetInitData();
+	
+	
+	void initSelcetMove(JButton[] getPositionButton, JFrame selectFrame, int selected, ControlMain controler, MapPrint mapPrint) {
+		this.getPositionButton =  getPositionButton;
+		this.selectFrame = selectFrame;
+		this.selected = selected;
+		this.controler = controler;
+		this.mapPrint = mapPrint;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(getPositionButton[0])) {
+				selected = 0;
+				System.out.println("selected number: 0");
+		}
+		else if(e.getSource().equals(getPositionButton[1])) {
+			selected = 1;
+			System.out.println("selected number: 1");
+		}
+		else if(e.getSource().equals(getPositionButton[2])) {
+			selected = 2;
+			System.out.println("selected number: 2");
+		}
+		else if(e.getSource().equals(getPositionButton[3])) {
+			selected = 3;
+			System.out.println("selected number: 3");
+		}
+		else if(e.getSource().equals(getPositionButton[4])) {
+			selected = 4;
+			System.out.println("selected number: 4");
+		}
+		
+		if(data.getFinishable()) {
+			if(delete.deleteSelectedMove(selected)) {
+				controler.finishStone();
+				mapPrint.turnChanged();
+				mapPrint.playerDataImageChange();
+				data.resetChangedData();
+				data.setFinishable(false);
+				selectFrame.dispose();
+				if(data.getEndCheck() != 9) {
+					initGame.getDataStart(1);
+				}
+			}
+			else {
+				System.out.println("해당 움직임이 없습니다.");
+			}
+		}
+	}
+}
+
+public class GetEndMove extends JFrame{
+	JButton[] getSelectButton = new JButton[5];
+	SelectMove position = new SelectMove();
+	int selected;
+	
+	void initPositionFrame(ControlMain controler, MapPrint mapPrint) {
+		this.setTitle("Select Move for finish stones");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//If user close the frame before select yut position, then program stop.
+		Container gamePanel = getContentPane();
+		gamePanel.setLayout(null);
+		
+		getSelectButton[0] = new JButton("Do");
+		getSelectButton[1] = new JButton("Gae");
+		getSelectButton[2] = new JButton("Goel");
+		getSelectButton[3] = new JButton("Yut");
+		getSelectButton[4] = new JButton("Mo");
+		
+		position.initSelcetMove(getSelectButton, this, selected, controler, mapPrint);
+		
+		for(int i = 0; i < 5; i++) {
+			getSelectButton[i].addActionListener(position);
+			getSelectButton[i].setBounds(14 + 114*i, 100, 100, 50);
+			gamePanel.add(getSelectButton[i]);
+		}
+		gamePanel.setBackground(Color.white);
+		this.setSize(600, 300);
+		this.setLocationRelativeTo(null);
+	}
+	
+	void showPositionFrame() {
+		this.setVisible(true);
+	}	
+}

@@ -25,7 +25,10 @@ public class ThrowingYut {
 			return 4;
 		}
 		else if(count ==1) {
-			return 0;
+			if(yut[3] == 1)
+				return -1;
+			else
+				return 0;
 		}
 		else if(count ==2) {
 			return 1;
@@ -43,7 +46,7 @@ public class ThrowingYut {
 		Random random = new Random();
 		int rand;
 		int yutPosition;
-		for(int i = 0; i< 4; i++) {
+		for(int i = 0; i< 3; i++) {
 			rand = random.nextInt(3);
 			if(rand == 0) {
 				yut[i] = 0;
@@ -70,32 +73,38 @@ public class ThrowingYut {
 		 * 3 = yut
 		 * 4 = mo
 		 */
+		if(selected == -1) {
+			yut[0] = 0;
+			yut[1] = 0;
+			yut[2] = 0;
+			yut[3] = 1;
+		}
 		if(selected == 0) {
-			yut[0]= 1;
+			yut[0] = 1;
 			yut[1] = 0;
 			yut[2] = 0;
 			yut[3] = 0;
 		}
 		else if(selected == 1) {
-			yut[0]= 1;
+			yut[0] = 1;
 			yut[1] = 1;
 			yut[2] = 0;
 			yut[3] = 0;
 		}
 		else if(selected == 2) {
-			yut[0]= 1;
+			yut[0] = 1;
 			yut[1] = 1;
 			yut[2] = 1;
 			yut[3] = 0;
 		}
 		else if(selected == 3) {
-			yut[0]= 1;
+			yut[0] = 1;
 			yut[1] = 1;
 			yut[2] = 1;
 			yut[3] = 1;
 		}
 		else if(selected == 4) {
-			yut[0]= 0;
+			yut[0] = 0;
 			yut[1] = 0;
 			yut[2] = 0;
 			yut[3] = 0;

@@ -57,5 +57,16 @@ public class DeleteMove extends StateExpressionChange{
 		else if(diff == 5) {
 			data.removePlayerMove(data.getTurn(), 4);
 		}
+		else
+			System.out.println("Delete back Do: " + data.removePlayerMove(data.getTurn(), -1));
+	}
+	
+	public boolean deleteSelectedMove(int move) {
+		if(data.findPlayerMove(data.getTurn(), move)) {
+			data.removePlayerMove(data.getTurn(), move);
+			return true;
+		}
+		else
+			return false;
 	}
 }
