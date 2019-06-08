@@ -1,0 +1,30 @@
+package Control;
+
+import Model.GameData;
+import java.util.Random;
+
+public class ThrowingYut {
+	GameData data = GameData.getInstance();
+	int[] yut =  new int[4];
+	
+	public boolean checkThrowCount(int team) {
+		if(0 != data.getPlayerThrowCount(team)) {
+			return  true;
+		}
+		return false;
+	}
+	
+	public void throwRandom(int team) {
+		Random random = new Random();
+		int rand;
+		for(int i = 0; i< 4; i++) {
+			rand = random.nextInt(3);
+			if(rand == 0) {
+				yut[i] = 0;
+			}
+			else {
+				yut[i] = 1;
+			}
+		}
+	}
+}

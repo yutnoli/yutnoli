@@ -1,0 +1,23 @@
+package Control;
+
+import Model.GameData;
+import Control.ThrowingYut;
+
+public class ControlMain {
+	GameData data = GameData.getInstance();
+	ThrowingYut throwYut = new ThrowingYut();
+	int turn = 0;//starts with team 0
+	boolean firstClicked = false;
+	int stateClickedByUser = -1;//-1 means null
+	int numOfStateClickedByUser = -1;//-1 means null
+	
+//if other button added overload right below function	
+	public void recieveAction(int state, int num) {//receive state button action
+		this.stateClickedByUser = state;
+		this.numOfStateClickedByUser = num;
+	}
+	
+	public void recieveAction(int throwOption) {//receive throw button action
+		
+	}
+}

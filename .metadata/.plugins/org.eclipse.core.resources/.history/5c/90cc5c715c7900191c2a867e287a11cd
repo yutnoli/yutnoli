@@ -192,7 +192,7 @@ public class GameData {
 		return stateChoosed;
 	}
 //set choosed state
-	public void setChoosedState(int state, int num) {
+	public void getChoosedState(int state, int num) {
 		stateChoosed[0] = state;
 		stateChoosed[1] = num;
 	}

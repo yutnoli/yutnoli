@@ -53,7 +53,18 @@ public class GameData {
 	private playerData[] player; 
 	private int[] yut = new int[4];//0 means round part, 1 means flat part
 	private int turn;
-	private int[] stateChoosed = new int[2];
+	
+	private GameData() {
+		this.numberOfPlayers = 4;
+		this.numberOfStones = 3;
+		this.turn = 0;
+		player = new playerData[this.numberOfPlayers];
+		for (int i = 0; i < this.numberOfPlayers; i++) {
+			player[i].team = i;
+			player[i].number = this.numberOfStones;
+			player[i].throwCount = 1;
+		}
+	}
 	
 	public static GameData getInstance() {//this function returns instance, which already exists
 		if(gameData == null) {
@@ -61,11 +72,10 @@ public class GameData {
 		}
 		return gameData;
 	}
-//must call this function after make GameData	
-	public void initGameData(int numberOfPlayers, int numberOfStones) {
+	
+	public GameData(int numberOfPlayers, int numberOfStones) {
 		this.numberOfPlayers = numberOfPlayers;
 		this.numberOfStones = numberOfStones;
-		this.turn = 0;
 		for(int i = 0; i < 4; i++) {
 			this.yut[i] = 0;
 		}
@@ -73,7 +83,6 @@ public class GameData {
 		for (int i = 0; i < this.numberOfPlayers; i++) {
 			player[i].team = i;
 			player[i].number = this.numberOfStones;
-			player[i].throwCount = 1;
 		}
 	}
 	
@@ -186,14 +195,5 @@ public class GameData {
 //move turn
 	public void moveTurn() {
 		turn = (turn+1)%numberOfPlayers;
-	}
-//get choosed state
-	public int[] getChoosedState() {
-		return stateChoosed;
-	}
-//set choosed state
-	public void setChoosedState(int state, int num) {
-		stateChoosed[0] = state;
-		stateChoosed[1] = num;
 	}
 }
